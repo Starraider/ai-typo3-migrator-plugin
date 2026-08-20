@@ -28,6 +28,12 @@ Consolidate two TYPO3 site packages into one target extension while preserving d
 - `plan`: source-to-target mapping, conflict decisions, validation, and rollback plan; no mutations.
 - `execute`: scoped merge changes and an evidence-based completion report.
 
+## License
+
+This skill is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).
+
 ## Resources
 
 - [Merge guidelines](references/merge-guidelines.md) — structured merge rules, validation, and reporting.

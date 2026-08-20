@@ -42,7 +42,9 @@ Use `typo3-merge-sitepackages` when the migration also requires a separately sco
 
 ## License
 
-No package-wide license file is supplied. Confirm the applicable terms before redistributing this skill.
+This skill is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).
 
 ## Resources
 

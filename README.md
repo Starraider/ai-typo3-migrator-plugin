@@ -14,3 +14,9 @@
 Compatible Agent Plugins clients discover the skills from immediate child directories of `skills/`. Each skill is self-contained and includes runtime instructions, supporting references, a detailed README, and representative/edge-case/boundary evaluation prompts. The `agents/openai.yaml` files retained within skill directories are optional client-specific display metadata; they are not part of the portable Agent Plugins core.
 
 The package declares Agent Plugins schema version 1.0.0 in [plugin.json](plugin.json). Installation, enablement, permissions, and client-specific presentation are managed by the consuming client.
+
+## License
+
+This project and all contained Agent Skills are licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).

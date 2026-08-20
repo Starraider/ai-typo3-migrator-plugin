@@ -1,7 +1,7 @@
 ---
 name: typo3-v12-to-v13-upgrade
 description: Use when analyzing, planning, or executing a Composer-based TYPO3 12.4 to 13.4 upgrade, including extension compatibility, Composer blockers, PHP/database readiness, Content Blocks 0.x migrations, Rector or Fractor migrations, and deprecated APIs. Not for patch updates, production deployment, or an unrelated site-package merge.
-license: CC-BY-SA-4.0
+license: CC-BY-4.0
 ---
 
 # TYPO3 v12 to v13 Upgrade
@@ -27,6 +27,12 @@ Produce an evidence-based, staged migration from TYPO3 12.4 to 13.4. Stabilize t
 - `analyze`: baseline, compatibility matrix, blockers, risks, and missing evidence; no mutations.
 - `plan`: a filled migration plan with approval gates and acceptance criteria; no mutations.
 - `execute`: scoped changes plus a completion report. Pause at every unapproved consequential boundary.
+
+## License
+
+This skill is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).
 
 ## Resources
 

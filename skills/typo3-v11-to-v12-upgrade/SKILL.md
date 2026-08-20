@@ -28,6 +28,12 @@ Produce an evidence-based, staged migration from TYPO3 11.5 to 12.4. Establish r
 - `plan`: a filled migration plan with approval gates and acceptance criteria; no mutations.
 - `execute`: scoped changes plus a completion report. Pause at every unapproved consequential boundary.
 
+## License
+
+This skill is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).
+
 ## Resources
 
 - [Command reference](references/command-reference.md) — inspection, migration, and verification commands.

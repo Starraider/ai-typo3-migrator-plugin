@@ -47,7 +47,9 @@ Use `typo3-v13-to-v14-upgrade` only after the v13 migration is stable and separa
 
 ## License
 
-CC-BY-SA-4.0.
+This skill is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).
 
 ## Resources
 
