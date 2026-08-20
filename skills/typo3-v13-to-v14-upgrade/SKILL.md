@@ -1,29 +1,36 @@
 ---
 name: typo3-v13-to-v14-upgrade
-description: "Use when upgrading TYPO3 13 to TYPO3 14, checking extension compatibility, Composer blockers, Rector/Fractor migrations, deprecations, or planning a major-version migration. Covers analysis, planning, and execution of TYPO3 13 to 14 upgrades in Composer-based projects."
+description: "Use when analyzing, planning, or executing a Composer-based TYPO3 13 to 14 upgrade, including extension compatibility, Composer blockers, PHP/database readiness, Rector or Fractor migrations, and deprecated APIs. Not for patch updates, production deployment, or an unrelated site-package merge."
 ---
 
 # TYPO3 v13 to v14 Upgrade
 
 Use this skill to analyze, plan, and execute a TYPO3 13 to TYPO3 14 upgrade in Composer-based projects. Treat the upgrade as a staged engineering change: first remove uncertainty, then plan the migration, then execute in small reversible steps.
 
-## Required Start
+## Scope and safety
 
-1. Read the repository's `AGENTS.md` and follow it. If it requires SequentialThinking, memory reads, DDEV, Playwright, Rector, or Fractor, apply those rules before touching files.
-2. Create or confirm a dedicated branch before making upgrade edits. Do not run destructive Git commands.
-3. Confirm the project is not production. TYPO3 major upgrades should run locally, in DDEV, or on a parallel copy with database and file backups.
-4. Fetch current documentation before planning version-specific changes:
+- Start in `analyze` mode when the user has not chosen a mode. `analyze` and `plan` are read-only: do not alter project files, Composer state, caches, or the database.
+- `execute` requires a local, DDEV, or parallel non-production copy, a recoverable database and file-storage backup, and a dedicated branch or an explicitly chosen alternative. Preserve unrelated worktree changes and do not run destructive Git commands.
+- Ask for explicit approval immediately before database-changing commands or backend actions, including database schema updates, upgrade wizards, reference-index updates, data conversions, cleanup, and production deployment. Explain the intended effect first.
+
+## Required start
+
+1. Read applicable repository instructions. If they require DDEV, Playwright, Rector, Fractor, or browser checks, apply those rules before editing.
+2. Inspect the Composer manifests/lock file, runtime, DDEV configuration, installed TYPO3 packages, local extensions, test scripts, and Git status. Confirm current and target TYPO3, PHP, and database versions.
+3. Fetch current documentation before planning version-specific changes:
    - Resolve and query TYPO3 documentation via Context7 when available.
    - Prefer official TYPO3 docs for v14 upgrade notes, pre-upgrade tasks, system requirements, changelogs, and extension scanner guidance.
    - Verify Rector and Fractor commands against the project's installed packages and config.
 
+   **Complete when** the project type, execution mode, target environment, and constraints are recorded.
+
 ## Operating Modes
 
-- `analyze`: Inventory the project, installed extensions, constraints, deprecations, and blockers. Do not change code except for explicitly requested reports.
+- `analyze`: Inventory the project, installed extensions, constraints, deprecations, and blockers. Do not change project files, Composer state, caches, or the database.
 - `plan`: Produce a detailed migration plan with ordered phases, commands, risks, rollback points, and acceptance criteria.
 - `execute`: Perform the upgrade incrementally. Keep changes focused, run dry-runs before applying automated refactors, and verify after every phase.
 
-If the user does not specify a mode, start with `analyze`, then ask before executing Composer or code changes unless the user already requested implementation.
+If the user does not specify a mode, start with `analyze`, then ask before executing Composer or code changes unless the user already requested implementation. Pause at every unapproved consequential boundary.
 
 ## Analysis Workflow
 
@@ -78,11 +85,9 @@ Classify actions as:
 
 ### 3. Deprecation And Breaking-Change Scan
 
-Run non-destructive scans first:
+Run inspection and dry-run scans first. Do not run database-writing commands during `analyze`:
 
 ```bash
-ddev typo3 referenceindex:update
-ddev typo3 cache:flush
 ddev exec vendor/bin/rector process --dry-run
 ddev php vendor/bin/fractor process --dry-run
 ```
@@ -111,7 +116,7 @@ Pay special attention to:
 
 ## Pre-Upgrade Preparation
 
-Produce and execute a checklist before changing Composer constraints:
+For `execute`, produce the checklist before changing Composer constraints. Obtain approval at the stated database-action boundaries:
 
 1. Backups:
    - Export database.
@@ -119,8 +124,8 @@ Produce and execute a checklist before changing Composer constraints:
    - Save current `composer.json` and `composer.lock` state through Git.
 2. Current v13 health:
    - Update to the latest TYPO3 13.4 patch release first.
-   - Run all pending v13 upgrade wizards.
-   - Update reference index.
+   - Run all pending v13 upgrade wizards only after approval.
+   - Update the reference index only after approval.
    - Flush and warm caches.
    - Fix existing test failures before upgrading.
 3. Dependency readiness:
@@ -202,8 +207,10 @@ Only create the branch if the user has not already chosen one. If the worktree i
 
 ```bash
 ddev composer update "typo3/*" --with-all-dependencies
+# Requires approval: upgrade wizards can modify persisted data.
 ddev typo3 upgrade:run
 # If the project uses a different command name, inspect `ddev typo3 list upgrade` first.
+# Requires approval: reference-index updates write to the database.
 ddev typo3 referenceindex:update
 ddev typo3 cache:flush
 ddev typo3 cache:warmup
@@ -245,8 +252,11 @@ Do not blindly use this sample. Include every installed `typo3/cms-*` package fr
 ddev composer dump-autoload
 ddev typo3 cache:flush
 ddev typo3 upgrade:list
+# Requires approval: upgrade wizards can modify persisted data.
 ddev typo3 upgrade:run
+# Requires approval: schema updates write to the database.
 ddev typo3 database:updateschema
+# Requires approval: reference-index updates write to the database.
 ddev typo3 referenceindex:update
 ddev exec vendor/bin/rector process --dry-run
 ddev php vendor/bin/fractor process --dry-run
@@ -328,3 +338,4 @@ Use current official documentation during each real upgrade because TYPO3 14 gui
 
 - Rector and Fractor command reference: [references/command-reference.md](references/command-reference.md)
 - Upgrade plan template and documentation links: [references/plan-template.md](references/plan-template.md)
+- Evaluation cases: [evals/evals.json](evals/evals.json)

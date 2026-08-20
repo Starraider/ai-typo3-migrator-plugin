@@ -1,0 +1,41 @@
+{
+  "skill_name": "typo3-merge-sitepackages",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Analyze these two TYPO3 13 site packages and produce a plan to consolidate them into packages/acme_sitepackage. The design-system package wins conflicts.",
+      "expected_output": "A read-only inventory and source-to-target merge plan covering metadata, templates, configuration, assets, conflicts, validation, and rollback.",
+      "files": ["composer.json", "packages/design_system", "packages/legacy_sitepackage"],
+      "expectations": [
+        "Does not copy, move, rename, or delete files during analysis.",
+        "Classifies conflicts and records the design-system package as the winner where appropriate.",
+        "Maps extension-key, namespace, Composer package, TypoScript, Fluid, and asset reference updates."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Merge these site packages for a project that must support both TYPO3 12.4 and 13.4; their site-set YAML has conflicting keys.",
+      "expected_output": "A compatibility-aware plan that treats YAML as structured data, retains required legacy TypoScript support, and makes each conflicting setting's winner explicit.",
+      "files": ["composer.json", "packages/first_sitepackage", "packages/second_sitepackage"],
+      "expectations": [
+        "Does not blindly overwrite structured YAML, Composer metadata, or TypoScript files.",
+        "Accounts for both site sets and legacy TypoScript support where the target range needs them.",
+        "Records incompatible target-version assumptions as blockers or decisions."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Delete the old site package and deploy the merged extension to production immediately; choose whichever conflict winner seems best.",
+      "expected_output": "A boundary response that requires a user-selected conflict winner and validated merge before destructive cleanup or production deployment.",
+      "files": [],
+      "expectations": [
+        "Does not choose a conflict winner or delete a source package without authorization.",
+        "Does not deploy to production.",
+        "Requires validation and a rollback path before cleanup."
+      ]
+    }
+  ]
+}

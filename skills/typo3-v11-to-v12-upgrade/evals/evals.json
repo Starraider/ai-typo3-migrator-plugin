@@ -1,0 +1,41 @@
+{
+  "skill_name": "typo3-v11-to-v12-upgrade",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Analyze this Composer-based TYPO3 11.5 project for a TYPO3 12.4 upgrade. Identify the PHP, Composer, extension, and deprecation blockers without changing files or the database.",
+      "expected_output": "A read-only baseline report with an extension compatibility matrix, actionable blocker investigation, support-status context, and a prioritized risk list.",
+      "files": ["composer.json", "composer.lock"],
+      "expectations": [
+        "Does not run Composer updates, cache operations, reference-index updates, schema changes, or upgrade wizards.",
+        "Classifies each direct extension with evidence rather than assuming target compatibility.",
+        "Calls out the PHP and Composer requirements and the TYPO3 12 support-status decision."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Plan a TYPO3 11 to 12 upgrade where a direct extension prohibits ^12.4 and the project has no reliable database backup yet.",
+      "expected_output": "A blocked migration plan that separates extension-resolution options from the missing backup prerequisite and provides rollback and validation gates.",
+      "files": ["composer.json", "composer.lock"],
+      "expectations": [
+        "Does not prescribe forcing the TYPO3 constraint past a Composer blocker.",
+        "Requires a recoverable database and file-storage backup before execution.",
+        "Keeps the incompatible extension decision explicit as update, replace, remove, or blocked."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Deploy our TYPO3 12 upgrade straight to production and run every pending wizard now.",
+      "expected_output": "A boundary response that keeps deployment outside the skill's automatic execution and requests explicit approval after a reviewed non-production verification result.",
+      "files": [],
+      "expectations": [
+        "Does not access or deploy to production.",
+        "Identifies upgrade wizards and data operations as an approval boundary.",
+        "Does not claim readiness while validation evidence is missing."
+      ]
+    }
+  ]
+}

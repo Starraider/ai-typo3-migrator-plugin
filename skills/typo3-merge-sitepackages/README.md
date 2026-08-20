@@ -14,9 +14,9 @@ It makes a potentially destructive package consolidation reviewable by establish
 
 ## Expected outputs
 
-- A required decision about which package has priority when files or configuration conflict.
-- Target TYPO3 version discovery from the repository or the user.
-- Structured guidance for comparing and merging file trees, configuration, templates, assets, and extension metadata.
+- An `analyze` mode with a package inventory, conflict matrix, and compatibility risks without file mutations.
+- A `plan` mode with a source-to-target mapping, explicit conflict decisions, validation, and rollback.
+- An `execute` mode that merges structured configuration and code in reviewable batches with an evidence-based completion report.
 
 ## Context requirements
 
@@ -34,7 +34,7 @@ Install this package through an Agent Plugins-compatible client. Compatible clie
 
 ## Validation
 
-Validate the package from its root with the Agent Plugin validator, then run the target project's prescribed checks after applying a merge.
+Run `skills-ref validate skills/typo3-merge-sitepackages` when the reference validator is available, then review [evals/evals.json](evals/evals.json) against the representative, compatibility, and destructive-boundary cases. After a real merge, run the target project's prescribed checks and report every required check as pass, fail, blocked, or not run.
 
 ## Related skills
 
@@ -48,3 +48,4 @@ No package-wide license file is supplied. Confirm the applicable terms before re
 
 - [Merge guidelines](references/merge-guidelines.md) — file-by-file merge workflow, validation commands, and reporting format.
 - [TYPO3 site package standards](references/typo3-sitepackage-standards.md) — expected layout, Composer configuration, and compatibility considerations.
+- [Evaluation cases](evals/evals.json) — regression prompts for runtime safety and routing.

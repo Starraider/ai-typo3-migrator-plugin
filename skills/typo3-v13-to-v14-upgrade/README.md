@@ -14,8 +14,8 @@ It converts a complex TYPO3 13 to 14 migration into a controlled sequence that i
 
 ## Expected outputs
 
-- `analyze` mode to establish a baseline, extension inventory, and blocker list without changing project code.
-- `plan` mode for an ordered migration plan, risks, commands, rollback points, and acceptance criteria.
+- `analyze` mode to establish a baseline, extension inventory, and blocker list without changing project files, Composer state, caches, or the database.
+- `plan` mode for an ordered migration plan, risks, project-adapted commands, approval gates, rollback points, and acceptance criteria.
 - `execute` mode for narrow, reversible changes with dry-runs and verification at each phase.
 
 ## Context requirements
@@ -34,7 +34,7 @@ Install this package through an Agent Plugins-compatible client. Compatible clie
 
 ## Validation
 
-Validate the package from its root with the Agent Plugin validator, and review [evals/evals.json](evals/evals.json) against realistic migration cases.
+Run `skills-ref validate skills/typo3-v13-to-v14-upgrade` when the reference validator is available, then review [evals/evals.json](evals/evals.json) against the representative, edge-case, and production-boundary cases. For a real migration, run the target repository's checks and report every required check as pass, fail, blocked, or not run.
 
 ## Related skills
 

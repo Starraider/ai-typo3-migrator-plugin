@@ -1,30 +1,37 @@
 ---
 name: typo3-v12-to-v13-upgrade
-description: "Use when upgrading TYPO3 12 to TYPO3 13, checking extension compatibility, Composer blockers, Rector/Fractor migrations, deprecations, platform requirements, or planning a major-version migration. Covers analysis, planning, and execution of TYPO3 12 to 13 upgrades in Composer-based projects."
+description: Use when analyzing, planning, or executing a Composer-based TYPO3 12.4 to 13.4 upgrade, including extension compatibility, Composer blockers, PHP/database readiness, Content Blocks 0.x migrations, Rector or Fractor migrations, and deprecated APIs. Not for patch updates, production deployment, or an unrelated site-package merge.
+license: CC-BY-SA-4.0
 ---
 
 # TYPO3 v12 to v13 Upgrade
 
-Use this skill to analyze, plan, and execute a TYPO3 12.4 LTS to TYPO3 13.4 LTS upgrade in Composer-based projects. Treat the upgrade as a staged change: stabilize TYPO3 12 first, remove blockers, then upgrade Composer constraints and migrate code/configuration in small steps.
+Produce an evidence-based, staged migration from TYPO3 12.4 to 13.4. Stabilize the source release, resolve compatibility blockers, and verify a copied non-production environment before considering deployment.
 
-## Required Start
+## Scope and safety
 
-1. **Check Repositories**: Read the repository's `AGENTS.md` and follow it. If it requires SequentialThinking, DDEV, Context7, Rector, Fractor, or browser checks, apply those rules before editing.
-2. **Fetch Docs**: Fetch current documentation before making version-specific claims. Resolve/query TYPO3 docs via Context7, and prefer official TYPO3 docs, get.typo3.org, TYPO3 Core changelogs, and package vendor docs.
-3. **Environment check**: Confirm the project is not production. Major upgrades should run locally, in DDEV, or on a parallel copy with database and file backups.
-4. **Git Branch**: Create or confirm a dedicated branch before making upgrade edits. Do not run destructive Git commands.
+- Start in `analyze` mode when the user has not chosen a mode. `analyze` and `plan` are read-only: do not alter project files, Composer state, caches, or the database.
+- `execute` requires a local, DDEV, or parallel non-production copy, a recoverable database and file-storage backup, and a dedicated branch or an explicitly chosen alternative. Preserve unrelated worktree changes.
+- Ask for explicit approval immediately before database-changing commands or backend actions, including database schema updates, upgrade wizards, reference-index updates, Content Blocks data conversions, cleanup, and production deployment. Explain the intended effect first.
 
-## Operating Modes
+## Workflow
 
-If not specified, start with `analyze`, then ask before executing.
-- `analyze`: Inventory versions, extensions, Composer blockers, deprecations, and risks. Do not change code.
-- `plan`: Produce a detailed migration plan with phases, commands, risks, rollback points, and acceptance criteria using the plan template.
-- `execute`: Perform the upgrade incrementally. Run dry-runs first, inspect diffs, and verify after every phase.
+1. **Establish context.** Read applicable repository instructions. Inspect Composer manifests/lock file, runtime, DDEV configuration, installed TYPO3 packages, local extensions, Content Blocks, test scripts, and Git status. Confirm current and target TYPO3, PHP, and database versions. **Complete when** project type, execution mode, target environment, and constraints are recorded.
+2. **Collect evidence.** In `analyze`, use only inspection commands. Build an extension compatibility matrix and identify Composer, platform, deprecation, webserver, and custom-code blockers. Verify time-sensitive requirements and extension support in current official TYPO3 and vendor documentation. **Complete when** every direct extension is classified as ready, update, migrate, replace, remove, or blocked with evidence.
+3. **Plan the migration.** Use [the plan template](references/plan-template.md) to define ordered phases, project-adapted commands, approval gates, rollback points, and acceptance checks. Treat site sets and PAGEVIEW as optional modernization unless explicitly in scope. **Complete when** no Composer transaction or data-changing step lacks prerequisites and a rollback point.
+4. **Execute incrementally.** Follow [the command reference](references/command-reference.md): stabilize TYPO3 12, resolve blockers, run and review refactor dry-runs, then update all installed TYPO3 packages together. Do not copy sample package lists blindly. For affected Content Blocks, record data contracts before changing structure and use [the migration checks](references/content-blocks-0x-to-1x.md). **Complete when** Composer resolves without ignored blockers and every approved data action is documented.
+5. **Verify and report.** Run repository checks first, then automated and manual checks. Use [v13 change hotspots](references/v13-change-hotspots.md) for targeted review. Report results as pass, fail, blocked, or not run; do not claim production readiness while required checks remain incomplete. **Complete when** the completion report records changed packages, wizards, data/schema actions, tests, manual checks, residual risks, and rollback instructions.
 
-## Reference Materials
+## Mode outputs
 
-Use the following detailed resources located in this skill:
-- **Command Reference**: [references/command-reference.md](references/command-reference.md) (All execution commands, scans, and verification tasks)
-- **Content Blocks migration**: [references/content-blocks-0x-to-1x.md](references/content-blocks-0x-to-1x.md) (0.x-to-1.x compatibility changes and preservation checks)
-- **Change Hotspots**: [references/v13-change-hotspots.md](references/v13-change-hotspots.md) (Platform requirements, RequireJS removal, native types, FAL, TCA/FlexForm changes, etc.)
-- **Plan Template**: [references/plan-template.md](references/plan-template.md) (Checklists, planning output formats, and completion reports)
+- `analyze`: baseline, compatibility matrix, blockers, risks, and missing evidence; no mutations.
+- `plan`: a filled migration plan with approval gates and acceptance criteria; no mutations.
+- `execute`: scoped changes plus a completion report. Pause at every unapproved consequential boundary.
+
+## Resources
+
+- [Command reference](references/command-reference.md) — inspection, migration, and verification commands.
+- [Content Blocks migration checks](references/content-blocks-0x-to-1x.md) — use only for Content Blocks 0.x to 1.x work.
+- [v13 change hotspots](references/v13-change-hotspots.md) — platform and migration areas requiring focused review.
+- [Plan template](references/plan-template.md) — migration-plan and completion-report structure.
+- [Evaluation cases](evals/evals.json) — representative, edge-case, and boundary prompts.

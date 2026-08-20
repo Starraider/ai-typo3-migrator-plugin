@@ -14,9 +14,9 @@ It turns a high-risk TYPO3 11 to 12 migration into a staged, reviewable workflow
 
 ## Expected outputs
 
-- An `analyze` mode for inventorying versions, blockers, and risks without changing code.
-- A `plan` mode with phased commands, rollback points, and acceptance criteria.
-- An `execute` mode for incremental, verified implementation after approval.
+- An `analyze` mode for inventorying versions, blockers, and risks without changing project files, Composer state, caches, or the database.
+- A `plan` mode with phased project-adapted commands, explicit approval gates, rollback points, and acceptance criteria.
+- An `execute` mode for incremental, verified implementation after backup and approval prerequisites are met.
 
 ## Context requirements
 
@@ -34,7 +34,7 @@ Install this package through an Agent Plugins-compatible client. Compatible clie
 
 ## Validation
 
-Validate the package from its root with the Agent Plugin validator, and validate this directory with an Agent Skills validator before release.
+Run `skills-ref validate skills/typo3-v11-to-v12-upgrade` when the reference validator is available, then review [evals/evals.json](evals/evals.json) against the representative, blocker, and production-boundary cases. For a real migration, run the target repository's checks and report every required check as pass, fail, blocked, or not run.
 
 ## Related skills
 
@@ -49,3 +49,4 @@ No package-wide license file is supplied. Confirm the applicable terms before re
 - [Command reference](references/command-reference.md) — inspection, migration, and verification commands.
 - [v12 change hotspots](references/v12-change-hotspots.md) — areas commonly affected by the upgrade.
 - [Plan template](references/plan-template.md) — phased migration and reporting structure.
+- [Evaluation cases](evals/evals.json) — regression prompts for runtime safety and routing.

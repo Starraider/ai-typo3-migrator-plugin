@@ -53,7 +53,9 @@ ddev npm install
 ### Phase 2: Current v13 Stabilization
 ```bash
 ddev composer update "typo3/*" --with-all-dependencies
+# Requires explicit approval: upgrade wizards can modify persisted data.
 ddev typo3 upgrade:run
+# Requires explicit approval: reference-index updates write to the database.
 ddev typo3 referenceindex:update
 ddev typo3 cache:flush
 ddev typo3 cache:warmup
@@ -73,8 +75,11 @@ ddev composer require --update-with-all-dependencies \
 ddev composer dump-autoload
 ddev typo3 cache:flush
 ddev typo3 upgrade:list
+# Requires explicit approval: upgrade wizards can modify persisted data.
 ddev typo3 upgrade:run
+# Requires explicit approval: schema updates write to the database.
 ddev typo3 database:updateschema
+# Requires explicit approval: reference-index updates write to the database.
 ddev typo3 referenceindex:update
 ```
 

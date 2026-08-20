@@ -44,6 +44,7 @@ This guide details the step-by-step workflow, structured merge rules, and final 
 
 7. Validate:
    - Run project-appropriate checks, for example `composer validate`, `ddev composer install`, `ddev composer ci:static`, asset build commands, `ddev typo3cms database:updateschema`, and `ddev typo3cms cache:flush`.
+   - Ask for explicit approval before database schema updates or other data-changing TYPO3 commands; inspect and explain the expected effect first.
    - For frontend changes, verify rendered pages in a browser when a local site is available.
    - If a command cannot run, state why and provide the residual risk.
 

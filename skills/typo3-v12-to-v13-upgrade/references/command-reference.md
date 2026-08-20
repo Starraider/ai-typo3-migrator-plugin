@@ -40,7 +40,9 @@ packages that cannot coexist with the target PHP or TYPO3 version.
 ```bash
 ddev composer update "typo3/*" --with-all-dependencies
 ddev typo3 upgrade:list
+# Requires explicit approval: upgrade wizards can modify persisted data.
 ddev typo3 upgrade:run
+# Requires explicit approval: reference-index updates write to the database.
 ddev typo3 referenceindex:update
 ddev typo3 cache:flush
 ddev typo3 cache:warmup
@@ -96,8 +98,11 @@ that Composer reports as blockers.
 ddev composer dump-autoload
 ddev typo3 cache:flush
 ddev typo3 upgrade:list
+# Requires explicit approval: upgrade wizards can modify persisted data.
 ddev typo3 upgrade:run
+# Requires explicit approval: schema updates write to the database.
 ddev typo3 database:updateschema
+# Requires explicit approval: reference-index updates write to the database.
 ddev typo3 referenceindex:update
 ddev typo3 language:update
 ddev typo3 cache:flush

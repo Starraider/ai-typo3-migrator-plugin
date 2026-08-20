@@ -16,9 +16,9 @@ It is not for TYPO3 patch updates, deployments, or unrelated extension migration
 
 ## Expected outputs
 
-- A reviewed dependency and source migration.
-- A documented, approval-gated database upgrade on a copied environment.
-- Preservation comparisons and a pass/fail/blocked manual verification matrix.
+- A read-only `analyze` mode with a compatibility matrix, blockers, and missing evidence.
+- A `plan` mode with approval-gated database work, rollback points, and project-adapted commands.
+- An `execute` mode with a reviewed dependency/source migration, preservation comparisons, and pass/fail/blocked verification evidence.
 
 ## Context requirements
 
@@ -39,12 +39,20 @@ Install this package through an Agent Plugins-compatible client, then invoke `ty
 
 ## Validation
 
-Review [evals/evals.json](evals/evals.json) with realistic migration, Content Blocks, and safety-boundary prompts. Agent Plugins conformance can be checked from the package root with the Agent Plugin validator.
+Run `skills-ref validate skills/typo3-v12-to-v13-upgrade` when the reference validator is available, then review [evals/evals.json](evals/evals.json) with the migration, Content Blocks, and production-boundary prompts. For a real migration, run the target repository's checks and report every required check as pass, fail, blocked, or not run.
 
 ## Related skills
 
-`typo3-gridelements-to-container` complements this skill when a project also needs to replace EXT:gridelements. Run that work as a separately reviewed migration after the v13 baseline is stable.
+Use `typo3-v13-to-v14-upgrade` only after the v13 migration is stable and separately verified. Use `typo3-merge-sitepackages` for a separately scoped package consolidation.
 
 ## License
 
 CC-BY-SA-4.0.
+
+## Resources
+
+- [Command reference](references/command-reference.md) — inspection, migration, and verification commands.
+- [Content Blocks migration checks](references/content-blocks-0x-to-1x.md) — preservation-focused 0.x to 1.x migration guidance.
+- [v13 change hotspots](references/v13-change-hotspots.md) — targeted technical review areas.
+- [Plan template](references/plan-template.md) — migration-plan and completion-report structure.
+- [Evaluation cases](evals/evals.json) — regression prompts for runtime safety and routing.
