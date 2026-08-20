@@ -1,0 +1,13 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "typo3-update-skills",
+  "version": "1.0.0",
+  "description": "Portable Agent Skills for planning, analyzing, and safely executing TYPO3 major-version upgrades and site package merges.",
+  "keywords": [
+    "typo3",
+    "cms",
+    "upgrade",
+    "migration",
+    "sitepackage"
+  ]
+}
