@@ -4,6 +4,7 @@
 
 ## Skills
 
+- [TYPO3 upgrade strategy analysis](skills/typo3-upgrade-strategy-analysis/README.md) compares sequential upgrades, a clean rebuild, and a hybrid migration between user-specified TYPO3 versions, then writes one strategy report.
 - [TYPO3 v11 to v12 upgrade](skills/typo3-v11-to-v12-upgrade/README.md) — analyze, plan, and execute a staged TYPO3 11.5 to 12.4 migration.
 - [TYPO3 v12 to v13 upgrade](skills/typo3-v12-to-v13-upgrade/README.md) — safely move a Composer-based TYPO3 12.4 project to TYPO3 13.4.
 - [TYPO3 v13 to v14 upgrade](skills/typo3-v13-to-v14-upgrade/README.md) — assess blockers and complete a controlled TYPO3 13 to 14 migration.

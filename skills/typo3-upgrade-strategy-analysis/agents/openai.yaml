@@ -1,0 +1,6 @@
+interface:
+  display_name: "TYPO3 Upgrade Strategy Analysis"
+  short_description: "Choose a TYPO3 version-upgrade path"
+  default_prompt: "Use $typo3-upgrade-strategy-analysis to compare sequential upgrades, a clean target rebuild, and a hybrid migration from the source TYPO3 version to my newer target, then write the strategy report."
+policy:
+  allow_implicit_invocation: false
