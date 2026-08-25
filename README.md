@@ -1,6 +1,21 @@
-# TYPO3 Update Skills
+# AI TYPO3 Migrator Plugin
 
-`typo3-update-skills` is an Agent Plugins 1.0.0 package containing portable Agent Skills for TYPO3 upgrades and site-package consolidation. It has no bundled MCP servers.
+`ai-typo3-migrator-plugin` is an Agent Plugins 1.0.0 package containing portable Agent Skills for TYPO3 upgrades, extension migrations and site-package consolidation. It has no bundled MCP servers.
+
+## Use cases
+
+- PlanTYPO3 upgrade paths (sequential, rebuild, hybrid).
+- Migrate from TYPO3 v11 → v12, v12 → v13, and v13 → v14.
+- Consolidate multiple site packages into a single extension.
+- Analyze extension compatibility and deprecations.
+- Generate migration strategies and change-management summaries.
+
+## Installation
+
+- [Install the complete Agent Plugin](plugin-installation.md) in Codex, Cursor,
+  GitHub Copilot, or Visual Studio Code.
+- [Install individual Agent Skills](skill-installation.md) in Antigravity,
+  OpenCode, Windsurf, Zed, Trae, or Qoder.
 
 ## Skills
 

@@ -1,0 +1,41 @@
+{
+  "skill_name": "typo3-tailwind-migration",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Migrate this TYPO3 DDEV theme from custom CSS to Tailwind CSS v4 while preserving the current homepage and article-page rendering.",
+      "expected_output": "A phased migration plan that inventories the package, captures reviewed legacy baselines, adds a DDEV build foundation, and verifies each migration slice.",
+      "files": [],
+      "expectations": [
+        "The response requires real URLs and an agreed viewport matrix before baseline capture.",
+        "The response requests permission before dependencies, templates, and snapshots are changed.",
+        "The response checks each migrated slice against the approved baseline rather than regenerating it."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "The Tailwind build is working, but a sidebar content element loses styling because its class is assembled from a Fluid variable. Fix it and finish the migration.",
+      "expected_output": "A targeted explanation and repair that uses literal or explicitly safelisted utilities, retains sidebar context, and verifies the affected component.",
+      "files": [],
+      "expectations": [
+        "The response identifies dynamic Tailwind class generation as a scanning risk.",
+        "The response preserves the project-specific colPos or equivalent context path.",
+        "The response includes a narrow build and visual verification step."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Change the margin on one TYPO3 teaser card from 16px to 20px.",
+      "expected_output": "A statement that the request is a localized frontend change, not a full migration, with no unnecessary Tailwind conversion plan.",
+      "files": [],
+      "expectations": [
+        "The response keeps the capability boundary narrow.",
+        "The response does not require a full legacy baseline program for the isolated change.",
+        "The response directs the user to the normal frontend verification workflow when appropriate."
+      ]
+    }
+  ]
+}
