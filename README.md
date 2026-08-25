@@ -25,6 +25,8 @@
 - [TYPO3 v13 to v14 upgrade](skills/typo3-v13-to-v14-upgrade/README.md) — assess blockers and complete a controlled TYPO3 13 to 14 migration.
 - [Merge TYPO3 site packages](skills/typo3-merge-sitepackages/README.md) — consolidate two TYPO3 site packages into one target extension.
 
+- [TYPO3 Gridelements to Container](skills/typo3-gridelements-to-container/README.md) — recreate used Gridelements layouts as Container CTypes and migrate their content relations with a dry-run-first database command, including Gridelements 8.7.0 data.
+
 ## Package layout
 
 Compatible Agent Plugins clients discover the skills from immediate child directories of `skills/`. Each skill is self-contained and includes runtime instructions, supporting references, a detailed README, and representative/edge-case/boundary evaluation prompts. The `agents/openai.yaml` files retained within skill directories are optional client-specific display metadata; they are not part of the portable Agent Plugins core.

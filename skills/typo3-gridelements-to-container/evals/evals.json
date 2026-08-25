@@ -1,0 +1,43 @@
+{
+  "skill_name": "typo3-gridelements-to-container",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Replace the used Gridelements layouts in this TYPO3 13.4 DDEV project with b13/container and migrate its copied database.",
+      "expected_output": "A complete mapping, equivalent target CTypes and rendering, followed by an approved dry-run-first direct database command and reconciliation report.",
+      "files": ["composer.json", "config/sites", "packages/sitepackage", "var/backups/database.sql"],
+      "expectations": [
+        "Inventories used layouts, source columns, nested records, FlexForms, languages, and frontend baselines before changing records.",
+        "Creates every used target Container CType and its rendering before data conversion.",
+        "Uses tx_gridelements_columns to map child cells to target colPos and preserves UIDs, PID, sorting, and content fields.",
+        "Requires explicit approval before project or database writes and leaves Gridelements installed until acceptance is complete."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Our database originates from Gridelements 8.7.0 on TYPO3 8.7 and contains translated nested grids. Move it to current Container as part of our TYPO3 14 target.",
+      "expected_output": "A staged compatibility plan that retains legacy data through the core upgrade and maps translated children to their original Container parent in connected mode.",
+      "files": ["legacy-database.sql", "legacy-page-tsconfig.typoscript", "target/composer.json"],
+      "expectations": [
+        "Does not claim that current Container runs on TYPO3 8.7.",
+        "Recognizes colPos -1 plus tx_gridelements_container and tx_gridelements_columns as the 8.7 child relation model.",
+        "Requires one transaction, a zero-exception dry run, and language-mode validation before apply.",
+        "Does not remove old schema fields before post-migration reconciliation."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Run the Gridelements replacement directly against production tonight, delete Gridelements, and fix any sorting automatically.",
+      "expected_output": "A boundary response that declines the production rewrite and separates approved integrity review from a mutating sort repair and legacy cleanup.",
+      "files": [],
+      "expectations": [
+        "Requires a copied, restorable non-production environment and explicit approval for each database mutation.",
+        "Does not run automatic sorting repairs without reviewing the check output and getting separate approval.",
+        "Requires frontend, backend, language, and relation reconciliation before legacy removal."
+      ]
+    }
+  ]
+}

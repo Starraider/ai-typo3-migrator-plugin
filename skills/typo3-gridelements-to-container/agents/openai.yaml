@@ -1,0 +1,4 @@
+interface:
+  display_name: "TYPO3 Gridelements to Container"
+  short_description: "Replace Gridelements layouts and relations safely"
+  default_prompt: "Use $typo3-gridelements-to-container to analyze this TYPO3 project and plan the Gridelements-to-Container migration without changing files or the database."

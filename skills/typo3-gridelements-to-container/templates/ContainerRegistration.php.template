@@ -1,0 +1,58 @@
+<?php
+
+declare(strict_types=1);
+
+defined('TYPO3') or die();
+
+use B13\Container\Tca\ContainerConfiguration;
+use B13\Container\Tca\Registry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+/*
+ * Copy this file into the target site's Configuration/TCA/Overrides/ directory.
+ * Replace every {{PLACEHOLDER}} from the approved source-to-target mapping.
+ * Create one registration per used legacy Gridelements layout.
+ */
+GeneralUtility::makeInstance(Registry::class)->configureContainer(
+    new ContainerConfiguration(
+        '{{target-ctype}}',
+        '{{editor label}}',
+        '{{editor description}}',
+        [
+            [
+                [
+                    'name' => '{{legacy cell label}}',
+                    'colPos' => 200,
+                    'colspan' => 1,
+                    'rowspan' => 1,
+                    // Copy allowed, disallowed, and maxitems from the legacy cell when used.
+                    // 'allowed' => ['CType' => 'text,textmedia'],
+                    // 'disallowed' => ['CType' => 'shortcut'],
+                    // 'maxitems' => 4,
+                ],
+                [
+                    'name' => '{{second legacy cell label}}',
+                    'colPos' => 201,
+                ],
+            ],
+        ],
+    )
+)
+    ->setIcon('EXT:{{sitepackage-extension-key}}/Resources/Public/Icons/{{target-ctype}}.svg')
+    ->setGroup('{{optional editor group}}');
+
+/*
+ * Add matching TypoScript and a Fluid template before converting data.
+ * TYPO3 13 example:
+ *
+ * tt_content.{{target-ctype}} < lib.contentElement
+ * tt_content.{{target-ctype}} {
+ *   templateName = {{TemplateName}}
+ *   templateRootPaths.10 = EXT:{{sitepackage-extension-key}}/Resources/Private/Templates/ContentElements
+ *   dataProcessing.100 = B13\Container\DataProcessing\ContainerProcessor
+ * }
+ *
+ * Render each processed child variable in its source layout's existing wrapper.
+ * Do not assume this registration creates a FlexForm. Add an equivalent target
+ * TCA data structure if the source template uses values from pi_flexform.
+ */

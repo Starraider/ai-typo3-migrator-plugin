@@ -1,0 +1,201 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{Vendor}}\{{Sitepackage}}\Command;
+
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+
+/*
+ * Put this command in the target site package and replace the configuration
+ * below. Register it through that package's existing TYPO3 services setup.
+ * It intentionally uses direct database writes. Run it only on a restored,
+ * copied non-production database, after the target Container CTypes exist.
+ */
+#[AsCommand(
+    name: '{{extension-key}}:migrate-gridelements-to-container',
+    description: 'Dry-run or apply the approved Gridelements-to-Container tt_content mapping',
+)]
+final class MigrateGridelementsToContainerCommand extends Command
+{
+    public function __construct(private readonly ConnectionPool $connectionPool)
+    {
+        parent::__construct();
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->addOption('apply', null, InputOption::VALUE_NONE, 'Write the mapped records')
+            ->addOption(
+                'i-understand-this-rewrites-tt-content',
+                null,
+                InputOption::VALUE_NONE,
+                'Required with --apply',
+            );
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $apply = (bool)$input->getOption('apply');
+        if ($apply && !$input->getOption('i-understand-this-rewrites-tt-content')) {
+            $output->writeln('<error>Refusing to write without --i-understand-this-rewrites-tt-content.</error>');
+            return Command::INVALID;
+        }
+
+        $connection = $this->connectionPool->getConnectionForTable('tt_content');
+        try {
+            $plan = $this->buildPlan($connection);
+        } catch (\RuntimeException $exception) {
+            $output->writeln('<error>Preflight failed: ' . $exception->getMessage() . '</error>');
+            return Command::FAILURE;
+        }
+
+        $output->writeln(json_encode([
+            'mode' => $apply ? 'apply' : 'dry-run',
+            'legacyParents' => count($plan['parents']),
+            'legacyChildren' => count($plan['children']),
+            'layouts' => $plan['layoutCounts'],
+        ], JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR));
+
+        if (!$apply) {
+            $output->writeln('<info>Dry run only. Review this report before requesting approval to apply.</info>');
+            return Command::SUCCESS;
+        }
+
+        $connection->beginTransaction();
+        try {
+            foreach ($plan['parents'] as $parent) {
+                $connection->update('tt_content', [
+                    'CType' => $parent['targetCType'],
+                    'tx_gridelements_backend_layout' => '',
+                ], ['uid' => $parent['uid']]);
+            }
+            foreach ($plan['children'] as $child) {
+                $connection->update('tt_content', [
+                    'colPos' => $child['targetColPos'],
+                    'tx_container_parent' => $child['targetParentUid'],
+                    'tx_gridelements_container' => 0,
+                    'tx_gridelements_columns' => 0,
+                ], ['uid' => $child['uid']]);
+            }
+            $connection->commit();
+        } catch (\Throwable $exception) {
+            $connection->rollBack();
+            throw $exception;
+        }
+
+        $output->writeln('<info>Migration committed. Run the reconciliation queries, Container sorting checks, reference-index update, and frontend/backend acceptance checks before cleanup.</info>');
+        return Command::SUCCESS;
+    }
+
+    /**
+     * Replace this mapping with the reviewed inventory. Keys are the exact
+     * stored tx_gridelements_backend_layout values, not display labels.
+     * Preserve pi_flexform only when the target CType has an equivalent TCA
+     * data structure and tested template consumer.
+     *
+     * @return array<string, array{targetCType: string, columns: array<int, int>}>
+     */
+    private function mapping(): array
+    {
+        return [
+            '{{legacy-layout-key}}' => [
+                'targetCType' => '{{target-ctype}}',
+                'columns' => [
+                    0 => 200,
+                    1 => 201,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array{
+     *   parents: list<array{uid: int, targetCType: string}>,
+     *   children: list<array{uid: int, targetColPos: int, targetParentUid: int}>,
+     *   layoutCounts: array<string, int>
+     * }
+     */
+    private function buildPlan(Connection $connection): array
+    {
+        $mapping = $this->mapping();
+        if ($mapping === [] || array_key_exists('{{legacy-layout-key}}', $mapping)) {
+            throw new \RuntimeException('Replace the example mapping before use.');
+        }
+
+        $parents = $connection->createQueryBuilder()
+            ->select('uid', 'pid', 'l18n_parent', 'tx_gridelements_backend_layout')
+            ->from('tt_content')
+            ->where(
+                'deleted = 0',
+                't3ver_wsid = 0',
+                'CType = ' . $connection->quote('gridelements_pi1'),
+            )
+            ->executeQuery()
+            ->fetchAllAssociative();
+
+        $parentByUid = [];
+        $planParents = [];
+        $layoutCounts = [];
+        foreach ($parents as $parent) {
+            $layout = (string)$parent['tx_gridelements_backend_layout'];
+            if (!isset($mapping[$layout])) {
+                throw new \RuntimeException(sprintf('No mapping for live Gridelements parent %d with layout "%s".', $parent['uid'], $layout));
+            }
+            $parentByUid[(int)$parent['uid']] = $parent;
+            $planParents[] = [
+                'uid' => (int)$parent['uid'],
+                'targetCType' => $mapping[$layout]['targetCType'],
+            ];
+            $layoutCounts[$layout] = ($layoutCounts[$layout] ?? 0) + 1;
+        }
+
+        $children = $connection->createQueryBuilder()
+            ->select('uid', 'pid', 'colPos', 'tx_gridelements_container', 'tx_gridelements_columns')
+            ->from('tt_content')
+            ->where('deleted = 0', 't3ver_wsid = 0', 'tx_gridelements_container > 0')
+            ->executeQuery()
+            ->fetchAllAssociative();
+
+        $planChildren = [];
+        foreach ($children as $child) {
+            $sourceParentUid = (int)$child['tx_gridelements_container'];
+            if (!isset($parentByUid[$sourceParentUid])) {
+                throw new \RuntimeException(sprintf('Child %d points to an unmapped or non-live parent %d.', $child['uid'], $sourceParentUid));
+            }
+            $parent = $parentByUid[$sourceParentUid];
+            $layout = (string)$parent['tx_gridelements_backend_layout'];
+            $oldColumn = (int)$child['tx_gridelements_columns'];
+            if ((int)$child['colPos'] !== -1) {
+                throw new \RuntimeException(sprintf('Child %d has colPos %d; Gridelements 8.7 children must be reviewed instead of converted blindly.', $child['uid'], $child['colPos']));
+            }
+            if ((int)$child['pid'] !== (int)$parent['pid']) {
+                throw new \RuntimeException(sprintf('Child %d and source parent %d have different PIDs.', $child['uid'], $sourceParentUid));
+            }
+            if (!array_key_exists($oldColumn, $mapping[$layout]['columns'])) {
+                throw new \RuntimeException(sprintf('No target column for child %d, layout "%s", source column %d.', $child['uid'], $layout, $oldColumn));
+            }
+            $targetColPos = $mapping[$layout]['columns'][$oldColumn];
+            if (!is_int($targetColPos) || $targetColPos < 0) {
+                throw new \RuntimeException(sprintf('Target column for layout "%s" and source column %d must be a nonnegative integer.', $layout, $oldColumn));
+            }
+            $planChildren[] = [
+                'uid' => (int)$child['uid'],
+                'targetColPos' => $targetColPos,
+                // Container connected mode points translations to their original parent.
+                'targetParentUid' => (int)$parent['l18n_parent'] > 0
+                    ? (int)$parent['l18n_parent']
+                    : $sourceParentUid,
+            ];
+        }
+
+        return ['parents' => $planParents, 'children' => $planChildren, 'layoutCounts' => $layoutCounts];
+    }
+}
