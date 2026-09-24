@@ -47,7 +47,7 @@ This directory is part of the plugin's `skills/` folder. Install the plugin usin
 Run the structural checks from the repository root:
 
 ```bash
-/Users/svenkalbhenn/.agents/skills/new-skill/scripts/validate-skill.sh skills/typo3-gridelements-to-container --strict-portable
+/path/to/new-skill/scripts/validate-skill.sh skills/typo3-gridelements-to-container --strict-portable
 skills-ref validate skills/typo3-gridelements-to-container
 ```
 
@@ -55,7 +55,9 @@ For a real migration, run the generated command without `--apply`, resolve every
 
 ## Related skills
 
+- [TYPO3 upgrade strategy analysis](../typo3-upgrade-strategy-analysis/README.md) assesses whether a sequential upgrade, rebuild, or hybrid path is best for projects with legacy Gridelements content structures.
 - [TYPO3 v11 to v12 upgrade](../typo3-v11-to-v12-upgrade/README.md), [TYPO3 v12 to v13 upgrade](../typo3-v12-to-v13-upgrade/README.md), and [TYPO3 v13 to v14 upgrade](../typo3-v13-to-v14-upgrade/README.md) cover the core-version path that may bring a Gridelements 8.7 database to a Container-compatible runtime.
+- [Merge TYPO3 site packages](../typo3-merge-sitepackages/README.md) helps when consolidating extensions or site packages that define Gridelements or Container layouts.
 
 ## License
 

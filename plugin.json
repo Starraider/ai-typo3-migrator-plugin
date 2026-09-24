@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ai-typo3-migrator-plugin",
   "version": "1.0.0",
-  "description": "Portable Agent Skills for planning, analyzing, and safely executing TYPO3 major-version upgrades, extension migrations, and site package merges.",
+  "description": "Portable Agent Skills for planning, analyzing, and safely executing TYPO3 major-version upgrades, extension migrations, CSS/theme modernizations, and site package merges.",
   "keywords": [
     "typo3",
     "cms",
@@ -10,6 +10,8 @@
     "migration",
     "sitepackage",
     "gridelements",
-    "container"
+    "container",
+    "tailwind",
+    "css"
   ]
 }

@@ -38,7 +38,10 @@ Run `skills-ref validate skills/typo3-v11-to-v12-upgrade` when the reference val
 
 ## Related skills
 
-Use `typo3-v12-to-v13-upgrade` when the project must continue from TYPO3 12 to 13. Use `typo3-merge-sitepackages` for a separately scoped site-package consolidation.
+- [TYPO3 v12 to v13 upgrade](../typo3-v12-to-v13-upgrade/README.md) when the project must continue from TYPO3 12 to 13.
+- [Merge TYPO3 site packages](../typo3-merge-sitepackages/README.md) for a separately scoped site-package consolidation.
+- [TYPO3 Gridelements to Container](../typo3-gridelements-to-container/README.md) when replacing deprecated EXT:gridelements with b13/container during or following the upgrade.
+- [TYPO3 Tailwind CSS migration](../typo3-tailwind-migration/README.md) for modernizing the frontend theme and CSS build pipeline in DDEV.
 
 ## License
 

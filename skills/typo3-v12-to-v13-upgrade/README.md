@@ -43,7 +43,10 @@ Run `skills-ref validate skills/typo3-v12-to-v13-upgrade` when the reference val
 
 ## Related skills
 
-Use `typo3-v13-to-v14-upgrade` only after the v13 migration is stable and separately verified. Use `typo3-merge-sitepackages` for a separately scoped package consolidation.
+- [TYPO3 v13 to v14 upgrade](../typo3-v13-to-v14-upgrade/README.md) only after the v13 migration is stable and separately verified.
+- [Merge TYPO3 site packages](../typo3-merge-sitepackages/README.md) for a separately scoped package consolidation.
+- [TYPO3 Gridelements to Container](../typo3-gridelements-to-container/README.md) when migrating legacy Gridelements content structures to b13/container on TYPO3 13.4.
+- [TYPO3 Tailwind CSS migration](../typo3-tailwind-migration/README.md) for theme modernization and Tailwind CSS v4 setup in DDEV.
 
 ## License
 

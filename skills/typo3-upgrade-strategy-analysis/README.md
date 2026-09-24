@@ -66,10 +66,12 @@ When the `new-skill` maintainer tooling is installed, also run its `scripts/vali
 
 ## Related skills
 
-- `typo3-v11-to-v12-upgrade` may execute that transition after strategy approval.
-- `typo3-v12-to-v13-upgrade` may execute that transition after TYPO3 12 is stable.
-- `typo3-v13-to-v14-upgrade` may execute that transition after TYPO3 13 is stable.
-- `typo3-merge-sitepackages` may help with a separately authorized site-package consolidation.
+- [TYPO3 v11 to v12 upgrade](../typo3-v11-to-v12-upgrade/README.md) may execute that transition after strategy approval.
+- [TYPO3 v12 to v13 upgrade](../typo3-v12-to-v13-upgrade/README.md) may execute that transition after TYPO3 12 is stable.
+- [TYPO3 v13 to v14 upgrade](../typo3-v13-to-v14-upgrade/README.md) may execute that transition after TYPO3 13 is stable.
+- [Merge TYPO3 site packages](../typo3-merge-sitepackages/README.md) may help with a separately authorized site-package consolidation.
+- [TYPO3 Gridelements to Container](../typo3-gridelements-to-container/README.md) addresses content element structure migration from EXT:gridelements to b13/container.
+- [TYPO3 Tailwind CSS migration](../typo3-tailwind-migration/README.md) guides frontend theme and CSS modernization into Tailwind CSS v4 in DDEV.
 
 The strategy Skill does not invoke these automatically or duplicate their execution commands. Paths outside their version coverage need separately designed execution guidance.
 

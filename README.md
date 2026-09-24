@@ -4,9 +4,11 @@
 
 ## Use cases
 
-- PlanTYPO3 upgrade paths (sequential, rebuild, hybrid).
+- Plan TYPO3 upgrade paths (sequential, rebuild, hybrid).
 - Migrate from TYPO3 v11 → v12, v12 → v13, and v13 → v14.
 - Consolidate multiple site packages into a single extension.
+- Migrate legacy or custom CSS site-package themes to Tailwind CSS v4 in DDEV.
+- Recreate Gridelements layouts as Container CTypes and migrate content relations.
 - Analyze extension compatibility and deprecations.
 - Generate migration strategies and change-management summaries.
 
@@ -24,8 +26,8 @@
 - [TYPO3 v12 to v13 upgrade](skills/typo3-v12-to-v13-upgrade/README.md) — safely move a Composer-based TYPO3 12.4 project to TYPO3 13.4.
 - [TYPO3 v13 to v14 upgrade](skills/typo3-v13-to-v14-upgrade/README.md) — assess blockers and complete a controlled TYPO3 13 to 14 migration.
 - [Merge TYPO3 site packages](skills/typo3-merge-sitepackages/README.md) — consolidate two TYPO3 site packages into one target extension.
-
 - [TYPO3 Gridelements to Container](skills/typo3-gridelements-to-container/README.md) — recreate used Gridelements layouts as Container CTypes and migrate their content relations with a dry-run-first database command, including Gridelements 8.7.0 data.
+- [TYPO3 Tailwind CSS migration](skills/typo3-tailwind-migration/README.md) — migrate a TYPO3 site package from legacy or custom CSS to Tailwind CSS v4 in DDEV with visual regression baselines.
 
 ## Package layout
 

@@ -38,7 +38,10 @@ Run `skills-ref validate skills/typo3-merge-sitepackages` when the reference val
 
 ## Related skills
 
-Use the version-specific upgrade skills before or after the merge when the target project also needs a major TYPO3 upgrade.
+- [TYPO3 upgrade strategy analysis](../typo3-upgrade-strategy-analysis/README.md) compares sequential, rebuild, and hybrid paths when site package consolidation is part of a larger migration.
+- [TYPO3 v11 to v12 upgrade](../typo3-v11-to-v12-upgrade/README.md), [TYPO3 v12 to v13 upgrade](../typo3-v12-to-v13-upgrade/README.md), and [TYPO3 v13 to v14 upgrade](../typo3-v13-to-v14-upgrade/README.md) handle major TYPO3 core migrations before or after merging packages.
+- [TYPO3 Tailwind CSS migration](../typo3-tailwind-migration/README.md) helps when consolidating and modernizing divergent CSS assets into a unified Tailwind CSS v4 pipeline.
+- [TYPO3 Gridelements to Container](../typo3-gridelements-to-container/README.md) guides converting legacy Gridelements layouts to Container CTypes when reconciling content element definitions.
 
 ## License
 

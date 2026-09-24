@@ -10,7 +10,7 @@ It guides a planned migration of one TYPO3 site package from legacy/custom CSS t
 - Existing page and component rendering must remain consistent at agreed URLs and viewports.
 - The work includes baseline capture, build integration, template conversion, accessibility, and supported-browser checks.
 
-Do not use it for a small isolated CSS fix. Use [TYPO3 Playwright Setup in DDEV](../typo3-playwright-ddev/README.md) when the required test infrastructure is not ready.
+Do not use it for a small isolated CSS fix. Use `typo3-playwright-ddev` (available in `ai-typo3-integrator-plugin` or project test suite) when the required test infrastructure is not ready.
 
 ## Expected outputs
 
@@ -59,8 +59,10 @@ Then review the representative, edge-case, and near-miss scenarios in [evals/eva
 
 ## Related skills
 
-- [TYPO3 Playwright Setup in DDEV](../typo3-playwright-ddev/README.md) for the required test infrastructure.
-- [TYPO3 Playwright Workflow](../typo3-playwright-workflow/README.md) for focused checks after each migration slice.
+- [Merge TYPO3 site packages](../typo3-merge-sitepackages/README.md) — consolidate multiple theme extensions or site packages before or during Tailwind CSS migration.
+- [TYPO3 upgrade strategy analysis](../typo3-upgrade-strategy-analysis/README.md) — evaluate frontend theme and CSS modernization effort alongside core upgrade paths.
+- [TYPO3 v11 to v12 upgrade](../typo3-v11-to-v12-upgrade/README.md), [TYPO3 v12 to v13 upgrade](../typo3-v12-to-v13-upgrade/README.md), and [TYPO3 v13 to v14 upgrade](../typo3-v13-to-v14-upgrade/README.md) — handle the core upgrade path that modern site packages and Tailwind pipelines run against.
+- `typo3-playwright-ddev` and `typo3-playwright-workflow` (available in `ai-typo3-integrator-plugin`) provide the underlying visual regression test infrastructure and focused check execution.
 
 ## License
 
