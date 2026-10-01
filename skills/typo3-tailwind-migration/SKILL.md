@@ -63,6 +63,16 @@ Do not delete legacy CSS until all agreed checks pass and the user explicitly au
 
 Completion: the agreed test matrix passes, intentional changes are documented, legacy files are removed only with approval, and project documentation reflects the final build/test commands.
 
+## Quality gates
+
+| Gate                   | When                    | Rule                                                                          |
+| ---------------------- | ----------------------- | ----------------------------------------------------------------------------- |
+| Test file verification | Every code review       | Every snapshot directory has a matching, version-controlled `.spec.ts` file   |
+| VRT comparison         | After every slice       | Compare against the reviewed legacy baselines, never freshly generated snapshots |
+| Spacing verification   | Before marking "done"   | Take margins/paddings from baseline screenshots or UX specs; do not guess     |
+| Accessibility audit    | After layout completion | Run axe-core across all agreed viewports and theme variants                   |
+| Cross-browser smoke    | After every story       | Run supported-browser smoke checks per story, not only at the end             |
+
 ## Maintainer evaluation
 
 Scenario coverage for this skill is recorded in [evals/evals.json](evals/evals.json). Run the validation commands in the README after editing this skill.

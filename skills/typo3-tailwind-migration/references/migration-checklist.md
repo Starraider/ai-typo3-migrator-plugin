@@ -121,13 +121,13 @@ For each element type, complete ALL items before moving to the next. Add section
 
 ### Performance
 
-- [ ] CSS bundle < 100KB compressed
+- [ ] Compiled CSS within the agreed project performance budget (or compared to the legacy baseline)
 - [ ] LCP images use `loading="eager"`
 - [ ] No layout shift after initial paint
 
 ## Phase 5: Cleanup
 
 - [ ] Legacy CSS files removed (after full verification)
-- [ ] Final `ddev npm run build` — only used utilities in output
+- [ ] Final site-package DDEV build (`ddev exec --dir packages/<theme-name> npm run build`) — only used utilities in output
 - [ ] Full test suite green
 - [ ] Documentation updated
