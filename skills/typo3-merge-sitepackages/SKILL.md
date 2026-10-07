@@ -28,6 +28,11 @@ Consolidate two TYPO3 site packages into one target extension while preserving d
 - `plan`: source-to-target mapping, conflict decisions, validation, and rollback plan; no mutations.
 - `execute`: scoped merge changes and an evidence-based completion report.
 
+## Related skills
+
+- `typo3-site-sets`: use when consolidating site sets, settings definitions, or site configuration in TYPO3 v13+.
+- `typo3-fluid-patterns`: use when resolving differences between, or overriding, Fluid layouts, partials, or templates.
+
 ## License
 
 This skill is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
