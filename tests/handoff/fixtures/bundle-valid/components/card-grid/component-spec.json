@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "component-spec",
+  "artifactId": "card-grid",
+  "revision": "sha256:15dd5246ed393eb6d0c6b20c2c209fd9b17bce3c1b9644aac846c4cdcf9897db",
+  "payloadDigest": "sha256:5b8059f158fc10cf8780ec29209f725c0aaba0480193ed638e6d8ef391b4ea9f",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "design-system",
+      "artifactId": "acme-site",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+      "ref": "../../design-system.json"
+    },
+    {
+      "artifactType": "component-spec",
+      "artifactId": "card",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:290d36f893021d813cdb823aa8ee96ce72bf663a534b100de58b39093497a8ae",
+      "ref": "../card/component-spec.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [],
+  "decisions": [],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "card-grid",
+      "name": "Card grid section",
+      "sourceLocator": "mockup/src/sections/CardGrid.tsx"
+    },
+    "scope": "parent-with-children",
+    "children": [
+      {
+        "componentId": "card",
+        "ref": "../card/component-spec.json",
+        "count": 3
+      }
+    ],
+    "structure": [
+      {
+        "part": "section",
+        "role": "full-width background",
+        "children": [
+          "column"
+        ]
+      }
+    ],
+    "variants": [],
+    "contentModel": [
+      {
+        "name": "cards",
+        "kind": "editorial",
+        "cardinality": "3..6"
+      }
+    ],
+    "assets": [],
+    "responsive": [
+      {
+        "condition": "below 48rem",
+        "rule": "single column",
+        "evidence": "source"
+      }
+    ],
+    "interactions": [],
+    "referenceCaptures": [],
+    "candidateNotes": [],
+    "verificationCriteria": [
+      {
+        "id": "vc-g1",
+        "criterion": "three columns at desktop"
+      }
+    ],
+    "targetHypothesis": {
+      "placementClass": "nested-container",
+      "placeable": true,
+      "container": {
+        "columns": [
+          {
+            "colPos": 101,
+            "name": "Cards",
+            "allowedChildren": [
+              "astryx_card"
+            ],
+            "min": 3,
+            "max": 6
+          }
+        ]
+      }
+    }
+  }
+}

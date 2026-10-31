@@ -1,0 +1,5 @@
+:root {
+  --accent: #0b5fff;
+  --radius-card: 12px;
+  --section-space: clamp(3rem, 6vw, 6rem);
+}

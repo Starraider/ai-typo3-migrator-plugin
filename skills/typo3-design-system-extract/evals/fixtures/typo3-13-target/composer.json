@@ -1,0 +1,9 @@
+{
+  "name": "eval/typo3-13-target",
+  "require": {
+    "php": "^8.2",
+    "typo3/cms-core": "~13.4.0",
+    "skom/stylex-connector": "^1.1.2"
+  }
+}
+

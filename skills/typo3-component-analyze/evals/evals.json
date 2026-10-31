@@ -1,0 +1,179 @@
+{
+  "skill_name": "typo3-component-analyze",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Analyze the Card component in skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx. Generate an implementation-independent specification for TYPO3.",
+      "expected_output": "A sealed component-spec.json and markdown report detailing the full card design (frame, composition, surface, typography, spacing, media and action appearances), editorial fields, vertical and horizontal variants, 16:9 media aspect ratio, and content element placement hypothesis.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx"
+      ],
+      "expectations": [
+        "The response decomposes the component into semantic parts: media, body, actions.",
+        "The response identifies vertical and horizontal variants supported in source.",
+        "The response isolates editorial content (title, badge, actions) from transient hover states.",
+        "The response describes the whole card's visual hierarchy, surface, typography, spacing, and important parts with evidence labels.",
+        "The response records evidenced hover/focus appearance separately from interaction behavior.",
+        "The response hypothesizes a placeable content element with FAL image integration."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "representative",
+      "prompt": "Analyze the full-width section in skills/typo3-component-analyze/evals/fixtures/mockup/src/sections/FullWidthHero.tsx.",
+      "expected_output": "A specification classifying the section as a container or content element and describing its full visual design, including full-width frame, inner content width, surface, heading hierarchy, spacing, and headline/CTA appearances.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/sections/FullWidthHero.tsx"
+      ],
+      "expectations": [
+        "The response documents full-width presentation requirements.",
+        "The response describes the outer section and inner content composition, surface, typography, and spacing.",
+        "The response identifies the content model for heading, lead paragraph, and background asset.",
+        "The response proposes container or structural section placement."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "edge-case",
+      "prompt": "Analyze the primary navigation component in skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Nav.tsx. Should this be a content element in tt_content?",
+      "expected_output": "A specification explaining that primary navigation uses TYPO3 page-tree hierarchy and MenuProcessor, placing it as page-layout-part rather than manual content records.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Nav.tsx"
+      ],
+      "expectations": [
+        "The response rejects creating manual content element records for standard page navigation.",
+        "The response classifies target placement as 'page-layout-part'.",
+        "The response notes that menu items, URLs, and active states derive from the page rootline."
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "edge-case",
+      "prompt": "Analyze the Carousel component in skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Carousel.tsx. The source has next/prev controls but does not define auto-scroll timing or infinite looping.",
+      "expected_output": "Identification of the interaction ambiguities, recording a decision gate or setting readiness to incomplete under unresolved items.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Carousel.tsx"
+      ],
+      "expectations": [
+        "The response notes ambiguous loop and auto-advance behavior as unevidenced.",
+        "The response asks a focused clarification question or marks readiness as incomplete.",
+        "The response does NOT assume infinite loop or auto-play without evidence."
+      ]
+    },
+    {
+      "id": 5,
+      "kind": "edge-case",
+      "prompt": "Analyze skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx without a global design-system.json handoff.",
+      "expected_output": "A valid specification that fully describes the component-specific visual design from local source and rendered evidence without inventing token mappings or listing missing global mappings as unresolved.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx"
+      ],
+      "expectations": [
+        "The response proceeds with component analysis using locally declared values.",
+        "The response includes frame, composition, surface, typography, spacing, important part appearances, and visual states under payload.design.",
+        "The response does not mention unresolved global mappings or invent global token names."
+      ]
+    },
+    {
+      "id": 6,
+      "kind": "edge-case",
+      "prompt": "Analyze the design in skills/typo3-component-analyze/evals/fixtures/mockup/desktop-1440.png. Only this screenshot is available.",
+      "expected_output": "A specification marked as incomplete that describes the complete visible component design with inferred measurements, while flagging mobile layout, responsive transitions, and unobserved interaction states as unknown.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/desktop-1440.png"
+      ],
+      "expectations": [
+        "The response classifies extracted visual values as inferred or approximate.",
+        "The response describes the visible frame, composition, typography appearance, spacing, surface, and important parts.",
+        "The response marks mobile breakpoints and interactions as unknown.",
+        "The response sets readiness to incomplete with explicit unresolved entries."
+      ]
+    },
+    {
+      "id": 7,
+      "kind": "edge-case",
+      "prompt": "Analyze Banner.tsx which references an inaccessible remote SVG URL 'https://cdn.example.invalid/promo-badge.svg'.",
+      "expected_output": "An asset manifest entry preserving the locator, marking status as unresolved, and noting missing asset evidence.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Banner.tsx"
+      ],
+      "expectations": [
+        "The response includes the remote asset in the asset manifest.",
+        "The response marks the asset status as unresolved.",
+        "The response does not treat a placeholder as the real required asset."
+      ]
+    },
+    {
+      "id": 8,
+      "kind": "edge-case",
+      "prompt": "Analyze skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx while a design-system.json is present in the supplied bundle. Keep analysis focused on the component's own visual design.",
+      "expected_output": "A component specification that describes the card's complete design and does not inspect, compare, or depend on the global design-system handoff.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx",
+        "skills/typo3-component-analyze/evals/fixtures/bundles/fresh-session/design-system.json"
+      ],
+      "expectations": [
+        "The response does not inspect the supplied design-system.json or add it to the component spec dependencies.",
+        "The response describes observed component-specific visual values and defers global-system overlap assessment to implementation."
+      ]
+    },
+    {
+      "id": 9,
+      "kind": "near-miss",
+      "prompt": "Analyze the Card in skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx and implement it immediately as a TYPO3 Content Block in packages/site_theme.",
+      "expected_output": "A complete component specification, with a firm refusal to edit target code or create the Content Block, explaining skill boundaries.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx"
+      ],
+      "expectations": [
+        "The response completes the analysis handoff.",
+        "The response explicitly stops before editing target files.",
+        "The response directs the user to typo3-component-build for implementation."
+      ]
+    },
+    {
+      "id": 10,
+      "kind": "edge-case",
+      "prompt": "Analyze the CardGrid section in skills/typo3-component-analyze/evals/fixtures/mockup/src/sections/CardGrid.tsx. The user directs scope as 'parent-with-children'.",
+      "expected_output": "A parent specification referencing a separate card component specification as a child dependency.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/sections/CardGrid.tsx",
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx"
+      ],
+      "expectations": [
+        "The response records the user's scope decision as 'parent-with-children'.",
+        "The parent spec references the card component under children and dependencies.",
+        "The response defines the container columns and allowed children."
+      ]
+    },
+    {
+      "id": 11,
+      "kind": "edge-case",
+      "prompt": "Inspect the parent specification in skills/typo3-component-analyze/evals/fixtures/bundles/missing-child/components/card-grid/component-spec.json where the child card spec is missing.",
+      "expected_output": "Verification that the parent specification is marked incomplete and cannot be ready when a child specification is missing.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/bundles/missing-child/components/card-grid/component-spec.json"
+      ],
+      "expectations": [
+        "The response identifies the missing child specification.",
+        "The response verifies that readiness is incomplete and explains the missing dependency."
+      ]
+    },
+    {
+      "id": 12,
+      "kind": "edge-case",
+      "prompt": "Analyze 'Card'. The repository has both src/components/Card.tsx and src/components/blog/Card.tsx.",
+      "expected_output": "Context inspection followed by a focused clarification question asking which Card component to analyze.",
+      "files": [
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/Card.tsx",
+        "skills/typo3-component-analyze/evals/fixtures/mockup/src/components/blog/Card.tsx"
+      ],
+      "expectations": [
+        "The response detects multiple matching components.",
+        "The response asks a focused question specifying the two paths.",
+        "The response does not guess or analyze an arbitrary card without confirmation."
+      ]
+    }
+  ]
+}

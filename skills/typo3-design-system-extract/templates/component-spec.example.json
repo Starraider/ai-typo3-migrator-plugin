@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "component-spec",
+  "artifactId": "card",
+  "revision": "sha256:9bde5a0e6cac3c77d8ecfd585629bc86ffee12f3b4ac333fea9b0813f07b4f6c",
+  "payloadDigest": "sha256:3a9cdecbdce85069606da61de19b3a320b1b2bc0054182afe5589a2f92b300a3",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [],
+  "decisions": [
+    {
+      "id": "d-scope-card",
+      "question": "Analysis granularity for the card section?",
+      "options": [
+        "single",
+        "parent-with-children"
+      ],
+      "status": "answered",
+      "answer": "parent-with-children",
+      "answerWording": "one spec for the card, reused",
+      "date": "2026-10-31",
+      "appliesTo": "card",
+      "effect": "run-only"
+    }
+  ],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "card",
+      "name": "Card",
+      "sourceLocator": "mockup/src/components/Card.tsx",
+      "renderedLocation": "/#cards"
+    },
+    "scope": "single",
+    "children": [],
+    "structure": [
+      {
+        "part": "media",
+        "role": "image"
+      },
+      {
+        "part": "body",
+        "role": "title, badge, text, actions"
+      }
+    ],
+    "variants": [
+      {
+        "name": "vertical",
+        "evidence": "source"
+      },
+      {
+        "name": "horizontal",
+        "evidence": "source",
+        "condition": "md and up"
+      }
+    ],
+    "contentModel": [
+      {
+        "name": "title",
+        "kind": "editorial",
+        "cardinality": "1",
+        "validation": "max 80 characters"
+      },
+      {
+        "name": "badge",
+        "kind": "editorial",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "actions",
+        "kind": "editorial",
+        "cardinality": "0..3"
+      },
+      {
+        "name": "hover",
+        "kind": "interaction-state",
+        "cardinality": "n/a"
+      }
+    ],
+    "assets": [
+      {
+        "id": "card-image",
+        "role": "media",
+        "ownership": "fal-editorial",
+        "aspectRatio": "16:9",
+        "altRequired": true,
+        "status": "available"
+      }
+    ],
+    "responsive": [
+      {
+        "condition": "min-width 48rem",
+        "rule": "image moves beside text",
+        "evidence": "source"
+      }
+    ],
+    "interactions": [
+      {
+        "name": "focus",
+        "behavior": "visible focus ring on actions",
+        "evidence": "source",
+        "keyboard": "tab order follows DOM"
+      }
+    ],
+    "referenceCaptures": [
+      {
+        "ref": "references/card-768.png",
+        "viewport": "768x900",
+        "state": "default",
+        "conditions": "Example Sans loaded, DPR 1"
+      }
+    ],
+    "candidateNotes": [
+      {
+        "candidate": "Astryx Card",
+        "gaps": [
+          "no badge field"
+        ],
+        "advisory": true
+      }
+    ],
+    "verificationCriteria": [
+      {
+        "id": "vc-1",
+        "criterion": "box geometry within 1px",
+        "viewport": "768x900",
+        "state": "default"
+      }
+    ],
+    "targetHypothesis": {
+      "placementClass": "content-element",
+      "placeable": true,
+      "proposedFields": [
+        "header",
+        "image",
+        "badge",
+        "links"
+      ]
+    },
+    "design": {
+      "overview": {
+        "description": "Soft-cornered editorial card with media, a compact badge, clear title/body hierarchy, and grouped actions.",
+        "evidence": "rendered"
+      },
+      "frame": {
+        "description": "Card fills its grid cell, with the image spanning the media column; mobile stacks media above the content.",
+        "evidence": "source"
+      },
+      "composition": {
+        "description": "Media leads the reading order, followed by badge, title, body, then actions; at medium widths the media sits beside the text.",
+        "evidence": "source"
+      },
+      "surface": {
+        "description": "White surface, 12px corner radius, subtle 1px neutral border, and a low soft shadow.",
+        "evidence": "source"
+      },
+      "typography": [
+        {
+          "role": "title",
+          "appearance": "24px semibold with 1.2 line height.",
+          "evidence": "source"
+        },
+        {
+          "role": "body",
+          "appearance": "16px regular with 1.5 line height.",
+          "evidence": "source"
+        },
+        {
+          "role": "badge",
+          "appearance": "12px uppercase semibold.",
+          "evidence": "source"
+        }
+      ],
+      "spacing": [
+        {
+          "relationship": "card interior",
+          "appearance": "24px padding.",
+          "evidence": "source"
+        },
+        {
+          "relationship": "title to body",
+          "appearance": "8px gap.",
+          "evidence": "source"
+        },
+        {
+          "relationship": "body to actions",
+          "appearance": "16px gap.",
+          "evidence": "source"
+        }
+      ],
+      "parts": [
+        {
+          "part": "media",
+          "appearance": "16:9 image cropped with cover; rounded top corners when stacked.",
+          "evidence": "source"
+        },
+        {
+          "part": "badge",
+          "appearance": "Compact pill above the title.",
+          "evidence": "rendered"
+        },
+        {
+          "part": "title",
+          "appearance": "Prominent heading aligned to the content start.",
+          "evidence": "rendered"
+        },
+        {
+          "part": "actions",
+          "appearance": "Horizontal action group with a visible keyboard focus ring.",
+          "evidence": "source"
+        }
+      ],
+      "states": [
+        {
+          "state": "default",
+          "appearance": "Neutral surface with subtle border and shadow.",
+          "evidence": "rendered"
+        },
+        {
+          "state": "hover",
+          "appearance": "Shadow increases slightly without changing layout.",
+          "evidence": "source"
+        },
+        {
+          "state": "focus",
+          "appearance": "Action receives a 2px visible focus outline.",
+          "evidence": "source"
+        }
+      ]
+    }
+  }
+}

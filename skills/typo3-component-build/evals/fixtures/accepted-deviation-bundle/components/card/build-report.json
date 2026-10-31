@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "build-report",
+  "artifactId": "card-build",
+  "revision": "sha256:7fd029d75e50d9c967a63493f05c662b5d62296e64796a32cbff9d84505acffb",
+  "payloadDigest": "sha256:92a14aa123d0442bc05ac63970bad0898182f1c3dd734eb07e6ced1d094ee7d4",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "design-system",
+      "artifactId": "acme-site",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+      "ref": "../../design-system.json"
+    },
+    {
+      "artifactType": "component-spec",
+      "artifactId": "card",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:290d36f893021d813cdb823aa8ee96ce72bf663a534b100de58b39093497a8ae",
+      "ref": "component-spec.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [
+    {
+      "id": "v-editor",
+      "status": "passed",
+      "reason": "backend edit with long title checked"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d-recipe-gap-card",
+      "question": "Horizontal variant is rejected by the installed recipe allowlist and no clean site-package adaptation exists. Accept the nearest existing recipe or block?",
+      "options": [
+        "accepted-deviation",
+        "blocked"
+      ],
+      "status": "answered",
+      "answer": "accepted-deviation",
+      "answerWording": "Use the vertical recipe on tablet for now, we fix it upstream later.",
+      "date": "2026-10-30",
+      "appliesTo": "card",
+      "effect": "binding",
+      "bindingDigest": "sha256:32a557d1c5a2b8379d9e582a985ed4a877b5e59ae1f0ae928f1c9cea7306036a"
+    }
+  ],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "card",
+      "specRef": "component-spec.json"
+    },
+    "completion": "qualified",
+    "disposition": "extend",
+    "hypothesis": {
+      "outcome": "adopted"
+    },
+    "candidates": [
+      {
+        "name": "Astryx Card",
+        "path": "vendor/skom/typo3-astryx/ContentBlocks/ContentElements/card",
+        "installedVersion": "1.0.0",
+        "fields": [
+          "header",
+          "image",
+          "links"
+        ],
+        "slots": [
+          "default",
+          "media"
+        ],
+        "recipes": [
+          "vertical"
+        ],
+        "fit": "partial",
+        "gaps": [
+          "no badge field"
+        ],
+        "selected": true
+      }
+    ],
+    "rejectedAlternatives": [
+      {
+        "option": "new block",
+        "reason": "extension covers the badge gap"
+      }
+    ],
+    "preflight": {
+      "status": "passed",
+      "fscConflict": false,
+      "details": [
+        "TYPO3 14.3.1",
+        "PHP 8.3.12"
+      ]
+    },
+    "changes": [
+      {
+        "path": "packages/site/ContentBlocks/ContentElements/card-extension/config.yaml",
+        "kind": "created"
+      }
+    ],
+    "extensionPoints": [
+      "site-package Content Block extension"
+    ],
+    "assets": [
+      {
+        "id": "card-image",
+        "disposition": "FAL editorial"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c-style-768",
+        "kind": "computed-style",
+        "gate": "hard",
+        "status": "passed",
+        "viewport": "768x900",
+        "state": "default"
+      },
+      {
+        "id": "c-layout-768",
+        "kind": "layout",
+        "gate": "hard",
+        "status": "passed",
+        "viewport": "768x900",
+        "state": "default"
+      },
+      {
+        "id": "c-shot-768",
+        "kind": "screenshot",
+        "gate": "advisory",
+        "status": "passed",
+        "viewport": "768x900"
+      }
+    ],
+    "differences": [
+      {
+        "id": "diff-horizontal",
+        "description": "card stays vertical at 768px; reference is horizontal",
+        "disposition": "accepted",
+        "decisionId": "d-recipe-gap-card"
+      }
+    ],
+    "acceptedDeviations": [
+      {
+        "requirement": "horizontal variant at min-width 48rem",
+        "reason": "installed recipe allowlist has no horizontal option",
+        "approver": "Project owner (user)",
+        "decisionId": "d-recipe-gap-card"
+      }
+    ]
+  }
+}

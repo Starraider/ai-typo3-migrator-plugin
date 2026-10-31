@@ -1,0 +1,235 @@
+{
+  "skill_name": "typo3-component-build",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Implement the Hero component specified in skills/typo3-component-build/evals/fixtures/hero-bundle/components/hero/component-spec.json. Installed Astryx has an existing Hero element that supports all required fields and slots.",
+      "expected_output": "A candidate assessment selecting 'configure', documenting why compose/extend/create were rejected, updating token styling, and recording no unnecessary Content Block creation.",
+      "files": [
+        "skills/typo3-component-build/evals/fixtures/hero-bundle/components/hero/component-spec.json",
+        "skills/typo3-component-build/evals/fixtures/hero-bundle/design-system.json"
+      ],
+      "expectations": [
+        "The candidate assessment identifies the installed Astryx Hero element.",
+        "The selected disposition is 'configure'.",
+        "Rejected alternatives ('compose', 'extend', 'create') are documented with clear rationale.",
+        "The completion handoff records the reuse decision and all differences."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "representative",
+      "prompt": "Implement the 3-column feature section in skills/typo3-component-build/evals/fixtures/section-bundle/components/section/component-spec.json using an Astryx Container.",
+      "expected_output": "A candidate assessment selecting 'compose', configuring container columns and allowed children, and placing existing Card elements inside.",
+      "files": [
+        "skills/typo3-component-build/evals/fixtures/section-bundle/components/section/component-spec.json",
+        "skills/typo3-component-build/evals/fixtures/section-bundle/components/card/component-spec.json"
+      ],
+      "expectations": [
+        "The candidate assessment selects 'compose' using an Astryx Container.",
+        "The container configuration specifies columns and allowlists placeable card elements.",
+        "The completion handoff lists all decisions and remaining differences."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "representative",
+      "prompt": "Implement the Card in skills/typo3-component-build/evals/fixtures/card-bundle/components/card/component-spec.json. Installed Astryx Card matches except for a missing editorial badge field. Compare the component design with the global design-system handoff before editing.",
+      "expected_output": "A candidate assessment selecting 'extend', tracing the selected Card's active inherited styles, distinguishing inherited values from merely available global tokens, listing exact component-specific token IDs/values needed, then adding the badge field in the site package while preserving FAL image relations.",
+      "files": [
+        "skills/typo3-component-build/evals/fixtures/card-bundle/components/card/component-spec.json",
+        "skills/typo3-component-build/evals/fixtures/card-bundle/design-system.json"
+      ],
+      "expectations": [
+        "The candidate assessment selects 'extend'.",
+        "The site package Content Block extension defines the badge field without hacking vendor files.",
+        "Existing Card identifiers and FAL image relations are preserved.",
+        "Each `designCoverage` row identifies the selected target element, inheritance status/source/effective value, and matching global token IDs.",
+        "Component-specific design requirements include exact token IDs and values with `required` or `defined` status.",
+        "The completion handoff records the extension decision and all differences."
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "edge-case",
+      "prompt": "The component requires a 'pill-tag' recipe variant which is rejected by Astryx's fixed RecipeViewHelper allowlist. No clean site-package adaptation exists. How do you handle this?",
+      "expected_output": "Stop at the Recipe Gap decision gate and ask the user to choose between an accepted deviation or marking the component blocked with an upstream-gap report.",
+      "files": [],
+      "expectations": [
+        "The response attempts a clean site-package adaptation first.",
+        "Failing that, it triggers the recipe gap decision gate asking the user to choose deviation vs blocked.",
+        "The response does NOT silently substitute an existing recipe without approval.",
+        "In non-interactive mode, the component ends as blocked."
+      ]
+    },
+    {
+      "id": 5,
+      "kind": "edge-case",
+      "prompt": "Implement a bespoke multi-step pricing calculator widget. Installed Astryx has no matching content elements or interactive components.",
+      "expected_output": "A candidate assessment justifying the 'create' disposition, authoring a new site-package Content Block with clear documentation of rejected reuse candidates.",
+      "files": [],
+      "expectations": [
+        "The assessment systematically reviews existing candidates and finds full/partial fits impossible.",
+        "The selected disposition is 'create' with technical justification.",
+        "The new block is authored strictly within the site package.",
+        "The completion handoff lists the creation decision."
+      ]
+    },
+    {
+      "id": 6,
+      "kind": "edge-case",
+      "prompt": "A new card style variant is written in StyleX source, but the generated stylex-manifest.json in Resources/Public does not include its hash key.",
+      "expected_output": "Identification of a CSS/manifest mismatch, treating verification as failed until build manifests are synchronized.",
+      "files": [],
+      "expectations": [
+        "The verification protocol flags the style key mismatch between source and delivered manifest.",
+        "Verification status is marked failed, preventing verified completion.",
+        "The response identifies that matching build artifacts must be deployed as a single unit."
+      ]
+    },
+    {
+      "id": 7,
+      "kind": "edge-case",
+      "prompt": "The Card component matches the reference desktop layout within 1px, but on mobile (390px) the image is positioned below the text instead of above it as specified in the responsive contract.",
+      "expected_output": "Verification failure for mobile layout, preventing an unqualified verified completion status.",
+      "files": [],
+      "expectations": [
+        "The response compares the layout against the mobile transition rule.",
+        "Verification fails for the mobile viewport check.",
+        "Overall completion is kept qualified or incomplete, not verified."
+      ]
+    },
+    {
+      "id": 8,
+      "kind": "edge-case",
+      "prompt": "The component passes all screenshot visual comparisons, but pressing the Tab key traps focus in an infinite loop inside an interactive badge.",
+      "expected_output": "Functional verification failure due to keyboard focus trapping despite visual screenshot match.",
+      "files": [],
+      "expectations": [
+        "The response executes functional and keyboard accessibility checks separately from screenshots.",
+        "Verification fails due to focus trap.",
+        "The completion status cannot be verified while functional checks fail."
+      ]
+    },
+    {
+      "id": 9,
+      "kind": "edge-case",
+      "prompt": "Code generation and site-package build succeed, but no running TYPO3 backend or browser environment is available to run live visual tests.",
+      "expected_output": "Build and manifest checks pass, but rendered and editorial checks are reported as 'not-run' with completion set to 'qualified', not 'verified'.",
+      "files": [],
+      "expectations": [
+        "Rendered and editorial checks are recorded as status 'not-run' with clear reason.",
+        "Completion status is set to 'qualified', never 'verified'.",
+        "The response does not claim verified parity without live execution evidence."
+      ]
+    },
+    {
+      "id": 10,
+      "kind": "edge-case",
+      "prompt": "Attempt to implement a component using an input component-spec.json that references an outdated design-system token revision.",
+      "expected_output": "Detection of stale-dependency (exit code 2) during input handoff validation, blocking implementation until inputs are refreshed.",
+      "files": [
+        "skills/typo3-component-build/evals/fixtures/stale-token-bundle/components/card/component-spec.json",
+        "skills/typo3-component-build/evals/fixtures/stale-token-bundle/design-system.json"
+      ],
+      "expectations": [
+        "Input handoff validation identifies the stale token revision.",
+        "Implementation is halted before modifying target files.",
+        "The response reports the stale dependency and requires reassessment."
+      ]
+    },
+    {
+      "id": 11,
+      "kind": "edge-case",
+      "prompt": "Preflight detects typo3/cms-fluid-styled-content in target composer.json during component build.",
+      "expected_output": "Stop at the FSC decision gate. In interactive mode, ask the user; in non-interactive mode, exit as blocked with no target modifications.",
+      "files": [],
+      "expectations": [
+        "Preflight identifies the Fluid Styled Content conflict.",
+        "Zero target files are created or modified.",
+        "In non-interactive mode, preflight status is marked blocked.",
+        "The response does NOT remove FSC from composer.json as an implicit step."
+      ]
+    },
+    {
+      "id": 12,
+      "kind": "edge-case",
+      "prompt": "A screenshot diff tool reports a difference score of 0.05% (well below threshold), but computed layout shows the card container shifted by 4px to the right.",
+      "expected_output": "Verification failure because computed style and layout (±1px geometry) is the hard gate; advisory screenshot scores cannot override layout shifts.",
+      "files": [],
+      "expectations": [
+        "The hard gate (±1px geometry) triggers a failure due to the 4px shift.",
+        "The advisory screenshot diff is not allowed to pass the check.",
+        "The difference is documented in the build report."
+      ]
+    },
+    {
+      "id": 13,
+      "kind": "edge-case",
+      "prompt": "Computed style and layout checks match within 1px, but screenshot comparison flags minor font anti-aliasing rasterization noise along diagonal letterforms.",
+      "expected_output": "Verification passes: anti-aliasing noise is recorded separately under differences as 'noise' and does not fail the build.",
+      "files": [],
+      "expectations": [
+        "The response verifies that computed typography and geometry match exactly.",
+        "Anti-aliasing differences are classified as disposition 'noise'.",
+        "Verification is not failed solely due to rendering engine noise."
+      ]
+    },
+    {
+      "id": 14,
+      "kind": "representative",
+      "prompt": "A fresh session receives a build report at skills/typo3-component-build/evals/fixtures/accepted-deviation-bundle/components/card/build-report.json with an answered binding decision for an accepted recipe deviation.",
+      "expected_output": "The skill reuses the recorded decision without asking the user again, since the underlying binding requirements remain unchanged.",
+      "files": [
+        "skills/typo3-component-build/evals/fixtures/accepted-deviation-bundle/components/card/build-report.json",
+        "skills/typo3-component-build/evals/fixtures/accepted-deviation-bundle/components/card/component-spec.json"
+      ],
+      "expectations": [
+        "The skill validates the existing build report and finds the binding decision fresh.",
+        "The accepted deviation is applied without re-prompting the user.",
+        "The response confirms that binding requirements have not changed."
+      ]
+    },
+    {
+      "id": 15,
+      "kind": "edge-case",
+      "prompt": "The component spec hypothesized a standalone content element, but candidate assessment demonstrates that an Astryx Container composition is superior.",
+      "expected_output": "Build overrides the target hypothesis, recording hypothesis.outcome as 'overridden' with reasons, leaving the component specification valid and current.",
+      "files": [],
+      "expectations": [
+        "The build report records hypothesis.outcome as 'overridden' with technical justification.",
+        "The component specification is not marked stale or invalidated.",
+        "The build report documents the selected composition disposition."
+      ]
+    },
+    {
+      "id": 16,
+      "kind": "near-miss",
+      "prompt": "An embedded Fluid component (placementClass: 'native-component', placeable: false) is proposed for placement in a container column.",
+      "expected_output": "Strict rejection: embedded Fluid components cannot be placed in container columns; only placeable elements are permitted.",
+      "files": [
+        "skills/typo3-component-build/evals/fixtures/embedded-bundle/components/price-tag/component-spec.json"
+      ],
+      "expectations": [
+        "The response identifies that the embedded component is not placeable.",
+        "Container column placement is rejected.",
+        "The response explains that only Content Blocks and content elements can sit in container columns."
+      ]
+    },
+    {
+      "id": 17,
+      "kind": "edge-case",
+      "prompt": "Assess an existing Astryx Carousel candidate against a mockup Carousel that requires custom vertical scrolling and thumbnail synchronization.",
+      "expected_output": "Identification of behavior and interaction gaps, rejecting unchanged reuse and selecting justified site-package extension or creation.",
+      "files": [
+        "skills/typo3-component-build/evals/fixtures/carousel-bundle/components/carousel/component-spec.json"
+      ],
+      "expectations": [
+        "The candidate assessment identifies the specific interaction gaps in the existing carousel.",
+        "Unchanged reuse is rejected because requirements must not be weakened to fit a candidate.",
+        "The selected disposition (extend or create) is documented with rejected alternatives."
+      ]
+    }
+  ]
+}

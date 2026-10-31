@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "component-spec",
+  "artifactId": "card-grid",
+  "revision": "sha256:e6863466e270f7c94c79fd8db8ac59ecf325283a27cc42b85a94285f8a4c75c4",
+  "payloadDigest": "sha256:559c3a2ab906784567c3e8f79d9652d24524586a5275f3c13bf8dfbc597be43b",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "component-spec",
+      "artifactId": "card",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:9bde5a0e6cac3c77d8ecfd585629bc86ffee12f3b4ac333fea9b0813f07b4f6c",
+      "ref": "../card/component-spec.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [],
+  "decisions": [],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "card-grid",
+      "name": "Card grid section",
+      "sourceLocator": "mockup/src/sections/CardGrid.tsx"
+    },
+    "scope": "parent-with-children",
+    "children": [
+      {
+        "componentId": "card",
+        "ref": "../card/component-spec.json",
+        "count": 3
+      }
+    ],
+    "structure": [
+      {
+        "part": "section",
+        "role": "full-width background",
+        "children": [
+          "column"
+        ]
+      }
+    ],
+    "variants": [],
+    "contentModel": [
+      {
+        "name": "cards",
+        "kind": "editorial",
+        "cardinality": "3..6"
+      }
+    ],
+    "assets": [],
+    "responsive": [
+      {
+        "condition": "below 48rem",
+        "rule": "single column",
+        "evidence": "source"
+      }
+    ],
+    "interactions": [],
+    "referenceCaptures": [],
+    "candidateNotes": [],
+    "verificationCriteria": [
+      {
+        "id": "vc-g1",
+        "criterion": "three columns at desktop"
+      }
+    ],
+    "targetHypothesis": {
+      "placementClass": "nested-container",
+      "placeable": true,
+      "container": {
+        "columns": [
+          {
+            "colPos": 101,
+            "name": "Cards",
+            "allowedChildren": [
+              "astryx_card"
+            ],
+            "min": 3,
+            "max": 6
+          }
+        ]
+      }
+    },
+    "design": {
+      "overview": {
+        "description": "Full-width feature grid section with a strong heading area above a repeated card layout.",
+        "evidence": "rendered"
+      },
+      "frame": {
+        "description": "Background extends edge to edge; inner content is centered and capped at 72rem.",
+        "evidence": "source"
+      },
+      "composition": {
+        "description": "Heading and lead copy precede a three-column desktop grid; columns collapse into one below 48rem.",
+        "evidence": "source"
+      },
+      "surface": {
+        "description": "Pale neutral section background with generous vertical padding.",
+        "evidence": "source"
+      },
+      "typography": [
+        {
+          "role": "section heading",
+          "appearance": "Large bold heading, left aligned.",
+          "evidence": "rendered"
+        },
+        {
+          "role": "lead copy",
+          "appearance": "Smaller muted paragraph under the heading.",
+          "evidence": "rendered"
+        }
+      ],
+      "spacing": [
+        {
+          "relationship": "section edges to content",
+          "appearance": "64px vertical padding on desktop.",
+          "evidence": "source"
+        },
+        {
+          "relationship": "heading to card grid",
+          "appearance": "32px gap.",
+          "evidence": "source"
+        }
+      ],
+      "parts": [
+        {
+          "part": "heading area",
+          "appearance": "Heading and lead copy grouped above the card grid.",
+          "evidence": "rendered"
+        },
+        {
+          "part": "card grid",
+          "appearance": "Three equal columns on desktop with consistent gutters.",
+          "evidence": "source"
+        }
+      ],
+      "states": [
+        {
+          "state": "default",
+          "appearance": "Static section presentation.",
+          "evidence": "rendered"
+        }
+      ]
+    }
+  }
+}

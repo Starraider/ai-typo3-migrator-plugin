@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "build-report",
+  "artifactId": "card-build",
+  "revision": "sha256:c579ee94a6436f8ba9eee88214271cfc36d6965b40641ddd8f479f913cc31065",
+  "payloadDigest": "sha256:b01659ebaed235a5e059792cca37df74240bd1963dde965558b5fdabc93d9138",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "design-system",
+      "artifactId": "acme-site",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+      "ref": "../../design-system.json"
+    },
+    {
+      "artifactType": "component-spec",
+      "artifactId": "card",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:9bde5a0e6cac3c77d8ecfd585629bc86ffee12f3b4ac333fea9b0813f07b4f6c",
+      "ref": "component-spec.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [
+    {
+      "id": "v-editor",
+      "status": "passed",
+      "reason": "backend edit with long title checked"
+    }
+  ],
+  "decisions": [],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "card",
+      "specRef": "component-spec.json"
+    },
+    "completion": "verified",
+    "disposition": "extend",
+    "hypothesis": {
+      "outcome": "adopted"
+    },
+    "candidates": [
+      {
+        "name": "Astryx Card",
+        "path": "vendor/skom/typo3-astryx/ContentBlocks/ContentElements/card",
+        "installedVersion": "1.0.0",
+        "fields": [
+          "header",
+          "image",
+          "links"
+        ],
+        "slots": [
+          "default",
+          "media"
+        ],
+        "recipes": [
+          "vertical"
+        ],
+        "fit": "partial",
+        "gaps": [
+          "no badge field"
+        ],
+        "selected": true
+      }
+    ],
+    "rejectedAlternatives": [
+      {
+        "option": "new block",
+        "reason": "extension covers the badge gap"
+      }
+    ],
+    "preflight": {
+      "status": "passed",
+      "fscConflict": false,
+      "details": [
+        "TYPO3 14.3.1",
+        "PHP 8.3.12"
+      ]
+    },
+    "changes": [
+      {
+        "path": "packages/site/ContentBlocks/ContentElements/card-extension/config.yaml",
+        "kind": "created"
+      }
+    ],
+    "extensionPoints": [
+      "site-package Content Block extension"
+    ],
+    "assets": [
+      {
+        "id": "card-image",
+        "disposition": "FAL editorial"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c-style-768",
+        "kind": "computed-style",
+        "gate": "hard",
+        "status": "passed",
+        "viewport": "768x900",
+        "state": "default"
+      },
+      {
+        "id": "c-layout-768",
+        "kind": "layout",
+        "gate": "hard",
+        "status": "passed",
+        "viewport": "768x900",
+        "state": "default"
+      },
+      {
+        "id": "c-shot-768",
+        "kind": "screenshot",
+        "gate": "advisory",
+        "status": "passed",
+        "viewport": "768x900"
+      }
+    ],
+    "differences": [
+      {
+        "id": "diff-aa",
+        "description": "anti-aliasing noise",
+        "disposition": "noise"
+      }
+    ],
+    "acceptedDeviations": [],
+    "designCoverage": [
+      {
+        "requirement": "Card surface and corner radius",
+        "targetElement": "astryx_card, vertical recipe",
+        "componentValue": "White surface, 12px corners, 1px neutral border.",
+        "inheritance": "partial",
+        "inheritedFrom": [
+          "Astryx Card base component style",
+          "vertical recipe styles in Resources/Private/JavaScript/Stylex/"
+        ],
+        "inheritedValue": "White surface and 8px corner radius are inherited; no border is defined.",
+        "globalRefs": [],
+        "componentTokens": [
+          {
+            "id": "--site-card-border",
+            "value": "1px solid #e5e7eb",
+            "status": "defined"
+          },
+          {
+            "id": "--site-card-radius",
+            "value": "12px",
+            "status": "defined"
+          }
+        ],
+        "coverage": "partial",
+        "evidence": "Installed Card styles and recipe were inspected; the component spec requires a larger radius and border."
+      },
+      {
+        "requirement": "Card title typography",
+        "targetElement": "astryx_card, vertical recipe",
+        "componentValue": "24px semibold with 1.2 line height.",
+        "inheritance": "full",
+        "inheritedFrom": [
+          "Astryx Card title slot style",
+          "global heading style applied by the active site theme"
+        ],
+        "inheritedValue": "24px semibold with 1.2 line height.",
+        "globalRefs": [],
+        "componentTokens": [],
+        "coverage": "inherited",
+        "evidence": "The selected slot and active theme rules provide the specified typography."
+      },
+      {
+        "requirement": "Card hover elevation",
+        "targetElement": "astryx_card, vertical recipe",
+        "componentValue": "Shadow increases on hover without changing layout.",
+        "inheritance": "none",
+        "inheritedFrom": [],
+        "inheritedValue": "No hover elevation rule is present in the selected base component, recipe, or active theme.",
+        "globalRefs": [],
+        "componentTokens": [
+          {
+            "id": "--site-card-hover-shadow",
+            "value": "0 8px 24px rgb(0 0 0 / 12%)",
+            "status": "defined"
+          }
+        ],
+        "coverage": "component-specific",
+        "evidence": "The installed component styles and design-system handoff contain no matching elevation rule."
+      }
+    ]
+  }
+}

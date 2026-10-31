@@ -1,0 +1,11 @@
+:root {
+  --color-primary: #1d4ed8;
+  --color-secondary: #0f172a;
+  --font-heading: 'Custom Inter', sans-serif;
+  --spacing-section: clamp(2rem, 5vw, 5rem);
+}
+body {
+  font-family: var(--font-heading);
+  color: var(--color-secondary);
+}
+

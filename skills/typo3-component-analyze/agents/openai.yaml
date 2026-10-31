@@ -1,0 +1,11 @@
+interface:
+  display_name: "TYPO3 Component Analysis"
+  short_description: "Analyze a mockup component into a TYPO3-oriented specification without implementing it"
+  default_prompt: >-
+    Analyze the selected component using the supplied URL, source code, Stitch design,
+    screenshots, and related artifacts as a combined reference set. Describe its complete
+    visual design and inspect URLs in the internal browser. Produce an implementation-
+    independent TYPO3 specification without comparing it to global design tokens.
+policy:
+  allow_implicit_invocation: true
+

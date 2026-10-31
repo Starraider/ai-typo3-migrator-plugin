@@ -1,0 +1,10 @@
+interface:
+  display_name: "TYPO3 Component Building"
+  short_description: "Build and verify a specified component in TYPO3 14.3 via Astryx reuse"
+  default_prompt: >-
+    Implement the specified mockup component in TYPO3 14.3 using Astryx reuse, site-package
+    adaptation, and StyleX Connector delivery. Trace the selected element's inherited design
+    against global tokens, record component-specific tokens needed, and verify parity.
+policy:
+  allow_implicit_invocation: true
+

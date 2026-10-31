@@ -1,0 +1,582 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "handoff-v1/component-spec.payload.schema.json",
+  "title": "component-spec payload (v1)",
+  "type": "object",
+  "required": [
+    "component",
+    "scope",
+    "children",
+    "structure",
+    "variants",
+    "contentModel",
+    "assets",
+    "responsive",
+    "interactions",
+    "referenceCaptures",
+    "candidateNotes",
+    "verificationCriteria",
+    "targetHypothesis"
+  ],
+  "properties": {
+    "component": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "sourceLocator"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "renderedLocation": {
+          "type": "string"
+        }
+      }
+    },
+    "scope": {
+      "enum": [
+        "single",
+        "parent-with-children"
+      ]
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "componentId",
+          "ref",
+          "count"
+        ],
+        "properties": {
+          "componentId": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "structure": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "part",
+          "role"
+        ],
+        "properties": {
+          "part": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "evidence"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "evidence": {
+            "enum": [
+              "source",
+              "rendered",
+              "user",
+              "hypothetical"
+            ]
+          },
+          "condition": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "contentModel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind",
+          "cardinality"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "editorial",
+              "fixed",
+              "derived",
+              "interaction-state"
+            ]
+          },
+          "cardinality": {
+            "type": "string"
+          },
+          "default": {
+            "type": "string"
+          },
+          "validation": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "ownership",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "ownership": {
+            "enum": [
+              "site-package",
+              "fal-editorial"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "aspectRatio": {
+            "type": "string"
+          },
+          "altRequired": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "available",
+              "unresolved",
+              "placeholder"
+            ]
+          }
+        }
+      }
+    },
+    "responsive": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "condition",
+          "rule",
+          "evidence"
+        ],
+        "properties": {
+          "condition": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string"
+          },
+          "evidence": {
+            "enum": [
+              "source",
+              "rendered",
+              "user",
+              "unknown",
+              "proposed"
+            ]
+          }
+        }
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "behavior",
+          "evidence"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "behavior": {
+            "type": "string"
+          },
+          "evidence": {
+            "enum": [
+              "source",
+              "rendered",
+              "user",
+              "unknown",
+              "proposed"
+            ]
+          },
+          "keyboard": {
+            "type": "string"
+          },
+          "reducedMotion": {
+            "type": "string"
+          },
+          "noJs": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "referenceCaptures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "ref",
+          "viewport",
+          "state"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string"
+          },
+          "viewport": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "candidateNotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "candidate",
+          "gaps"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "string"
+          },
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "advisory": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "verificationCriteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "criterion"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "criterion": {
+            "type": "string"
+          },
+          "viewport": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "targetHypothesis": {
+      "type": "object",
+      "required": [
+        "placementClass",
+        "placeable"
+      ],
+      "properties": {
+        "placementClass": {
+          "enum": [
+            "content-element",
+            "nested-container",
+            "native-component",
+            "page-layout-part"
+          ]
+        },
+        "placeable": {
+          "type": "boolean"
+        },
+        "proposedFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "container": {
+          "type": "object",
+          "required": [
+            "columns"
+          ],
+          "properties": {
+            "columns": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "colPos",
+                  "name",
+                  "allowedChildren",
+                  "min",
+                  "max"
+                ],
+                "properties": {
+                  "colPos": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "allowedChildren": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "min": {
+                    "type": "integer"
+                  },
+                  "max": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": [
+        "overview",
+        "frame",
+        "composition",
+        "surface",
+        "typography",
+        "spacing",
+        "parts",
+        "states"
+      ],
+      "properties": {
+        "overview": {
+          "$ref": "#/$defs/visualDescription"
+        },
+        "frame": {
+          "$ref": "#/$defs/visualDescription"
+        },
+        "composition": {
+          "$ref": "#/$defs/visualDescription"
+        },
+        "surface": {
+          "$ref": "#/$defs/visualDescription"
+        },
+        "typography": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typographicAppearance"
+          }
+        },
+        "spacing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spacingAppearance"
+          }
+        },
+        "parts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/partAppearance"
+          }
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateAppearance"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "visualDescription": {
+      "type": "object",
+      "required": [
+        "description",
+        "evidence"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "evidence": {
+          "enum": [
+            "source",
+            "rendered",
+            "user",
+            "inferred",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "typographicAppearance": {
+      "type": "object",
+      "required": [
+        "role",
+        "appearance",
+        "evidence"
+      ],
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "appearance": {
+          "type": "string"
+        },
+        "evidence": {
+          "enum": [
+            "source",
+            "rendered",
+            "user",
+            "inferred",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "spacingAppearance": {
+      "type": "object",
+      "required": [
+        "relationship",
+        "appearance",
+        "evidence"
+      ],
+      "properties": {
+        "relationship": {
+          "type": "string"
+        },
+        "appearance": {
+          "type": "string"
+        },
+        "evidence": {
+          "enum": [
+            "source",
+            "rendered",
+            "user",
+            "inferred",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "partAppearance": {
+      "type": "object",
+      "required": [
+        "part",
+        "appearance",
+        "evidence"
+      ],
+      "properties": {
+        "part": {
+          "type": "string"
+        },
+        "appearance": {
+          "type": "string"
+        },
+        "evidence": {
+          "enum": [
+            "source",
+            "rendered",
+            "user",
+            "inferred",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "stateAppearance": {
+      "type": "object",
+      "required": [
+        "state",
+        "appearance",
+        "evidence"
+      ],
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "appearance": {
+          "type": "string"
+        },
+        "evidence": {
+          "enum": [
+            "source",
+            "rendered",
+            "user",
+            "inferred",
+            "unknown"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "component-spec",
+  "artifactId": "carousel",
+  "revision": "sha256:0faf2c4d8fbb6ef331c83a615d12d89e13e1f266fb76fa818d38f9d17f82bf86",
+  "payloadDigest": "sha256:5f621b4316c1df113990776f2e84b12be06cbdddf12395e3ac257c8de86ae7ea",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "design-system",
+      "artifactId": "acme-site",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+      "ref": "../../design-system.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [],
+  "decisions": [],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "carousel",
+      "name": "Carousel",
+      "sourceLocator": "mockup/src/components/Carousel.tsx",
+      "renderedLocation": "/#carousel"
+    },
+    "scope": "single",
+    "children": [],
+    "structure": [
+      {
+        "part": "viewport",
+        "role": "slides"
+      },
+      {
+        "part": "controls",
+        "role": "previous, next, pause"
+      }
+    ],
+    "variants": [
+      {
+        "name": "default",
+        "evidence": "source"
+      }
+    ],
+    "contentModel": [
+      {
+        "name": "slides",
+        "kind": "editorial",
+        "cardinality": "2..8"
+      },
+      {
+        "name": "current-slide",
+        "kind": "interaction-state",
+        "cardinality": "n/a"
+      }
+    ],
+    "assets": [
+      {
+        "id": "slide-image",
+        "role": "media",
+        "ownership": "fal-editorial",
+        "altRequired": true,
+        "status": "available"
+      }
+    ],
+    "responsive": [
+      {
+        "condition": "min-width 48rem",
+        "rule": "two slides visible",
+        "evidence": "source"
+      }
+    ],
+    "interactions": [
+      {
+        "name": "autoplay",
+        "behavior": "advances every 6s, pauses on hover, focus and when paused by control",
+        "evidence": "source",
+        "keyboard": "arrow keys move between slides; controls reachable by Tab",
+        "reducedMotion": "no autoplay, no sliding transition",
+        "noJs": "slides stack vertically"
+      }
+    ],
+    "referenceCaptures": [
+      {
+        "ref": "references/card-768.png",
+        "viewport": "768x900",
+        "state": "default",
+        "conditions": "Example Sans loaded, DPR 1"
+      }
+    ],
+    "candidateNotes": [
+      {
+        "candidate": "Astryx Carousel",
+        "gaps": [
+          "no pause control; arrow keys unconfirmed"
+        ],
+        "advisory": true
+      }
+    ],
+    "verificationCriteria": [
+      {
+        "id": "vc-1",
+        "criterion": "box geometry within 1px",
+        "viewport": "768x900",
+        "state": "default"
+      }
+    ],
+    "targetHypothesis": {
+      "placementClass": "content-element",
+      "placeable": true,
+      "proposedFields": [
+        "slides"
+      ]
+    }
+  }
+}

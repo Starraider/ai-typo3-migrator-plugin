@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "component-spec",
+  "artifactId": "card",
+  "revision": "sha256:290d36f893021d813cdb823aa8ee96ce72bf663a534b100de58b39093497a8ae",
+  "payloadDigest": "sha256:32a557d1c5a2b8379d9e582a985ed4a877b5e59ae1f0ae928f1c9cea7306036a",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "design-system",
+      "artifactId": "acme-site",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+      "ref": "../../design-system.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [],
+  "decisions": [
+    {
+      "id": "d-scope-card",
+      "question": "Analysis granularity for the card section?",
+      "options": [
+        "single",
+        "parent-with-children"
+      ],
+      "status": "answered",
+      "answer": "parent-with-children",
+      "answerWording": "one spec for the card, reused",
+      "date": "2026-10-31",
+      "appliesTo": "card",
+      "effect": "run-only"
+    }
+  ],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "card",
+      "name": "Card",
+      "sourceLocator": "mockup/src/components/Card.tsx",
+      "renderedLocation": "/#cards"
+    },
+    "scope": "single",
+    "children": [],
+    "structure": [
+      {
+        "part": "media",
+        "role": "image"
+      },
+      {
+        "part": "body",
+        "role": "title, badge, text, actions"
+      }
+    ],
+    "variants": [
+      {
+        "name": "vertical",
+        "evidence": "source"
+      },
+      {
+        "name": "horizontal",
+        "evidence": "source",
+        "condition": "md and up"
+      }
+    ],
+    "contentModel": [
+      {
+        "name": "title",
+        "kind": "editorial",
+        "cardinality": "1",
+        "validation": "max 80 characters"
+      },
+      {
+        "name": "badge",
+        "kind": "editorial",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "actions",
+        "kind": "editorial",
+        "cardinality": "0..3"
+      },
+      {
+        "name": "hover",
+        "kind": "interaction-state",
+        "cardinality": "n/a"
+      }
+    ],
+    "assets": [
+      {
+        "id": "card-image",
+        "role": "media",
+        "ownership": "fal-editorial",
+        "aspectRatio": "16:9",
+        "altRequired": true,
+        "status": "available"
+      }
+    ],
+    "responsive": [
+      {
+        "condition": "min-width 48rem",
+        "rule": "image moves beside text",
+        "evidence": "source"
+      }
+    ],
+    "interactions": [
+      {
+        "name": "focus",
+        "behavior": "visible focus ring on actions",
+        "evidence": "source",
+        "keyboard": "tab order follows DOM"
+      }
+    ],
+    "referenceCaptures": [
+      {
+        "ref": "references/card-768.png",
+        "viewport": "768x900",
+        "state": "default",
+        "conditions": "Example Sans loaded, DPR 1"
+      }
+    ],
+    "candidateNotes": [
+      {
+        "candidate": "Astryx Card",
+        "gaps": [
+          "no badge field"
+        ],
+        "advisory": true
+      }
+    ],
+    "verificationCriteria": [
+      {
+        "id": "vc-1",
+        "criterion": "box geometry within 1px",
+        "viewport": "768x900",
+        "state": "default"
+      }
+    ],
+    "targetHypothesis": {
+      "placementClass": "content-element",
+      "placeable": true,
+      "proposedFields": [
+        "header",
+        "image",
+        "badge",
+        "links"
+      ]
+    }
+  }
+}

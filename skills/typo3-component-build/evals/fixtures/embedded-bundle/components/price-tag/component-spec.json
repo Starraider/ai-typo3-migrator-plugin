@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "component-spec",
+  "artifactId": "price-tag",
+  "revision": "sha256:b07bf1bce8e421a79324907a0ac2783d425fa9f4d787c6cee9f97137bfa7de8d",
+  "payloadDigest": "sha256:218013b2d67f5a8e184f953b5a437284faaa8909ac6d164c0fafd9fe2436371f",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "design-system",
+      "artifactId": "acme-site",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+      "ref": "../../design-system.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [],
+  "decisions": [],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "price-tag",
+      "name": "PriceTag",
+      "sourceLocator": "mockup/src/components/PriceTag.tsx",
+      "renderedLocation": "/#price-tag"
+    },
+    "scope": "single",
+    "children": [],
+    "structure": [
+      {
+        "part": "label",
+        "role": "price tag"
+      }
+    ],
+    "variants": [
+      {
+        "name": "default",
+        "evidence": "source"
+      }
+    ],
+    "contentModel": [
+      {
+        "name": "price",
+        "kind": "derived",
+        "cardinality": "1"
+      }
+    ],
+    "assets": [],
+    "responsive": [],
+    "interactions": [],
+    "referenceCaptures": [
+      {
+        "ref": "references/card-768.png",
+        "viewport": "768x900",
+        "state": "default",
+        "conditions": "Example Sans loaded, DPR 1"
+      }
+    ],
+    "candidateNotes": [],
+    "verificationCriteria": [
+      {
+        "id": "vc-1",
+        "criterion": "box geometry within 1px",
+        "viewport": "768x900",
+        "state": "default"
+      }
+    ],
+    "targetHypothesis": {
+      "placementClass": "native-component",
+      "placeable": false,
+      "proposedFields": []
+    }
+  }
+}

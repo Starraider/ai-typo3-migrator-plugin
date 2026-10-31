@@ -1,0 +1,128 @@
+{
+  "skill_name": "typo3-design-system-extract",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Extract the global design system from the React project at skills/typo3-design-system-extract/evals/fixtures/react-tailwind into a migration bundle. Map the colors and typography to Astryx tokens.",
+      "expected_output": "A sealed design-system handoff with observed tokens from index.css and tailwind.config.js mapped onto installed Astryx tokens, with project tokens defined for unmapped values.",
+      "files": [
+        "skills/typo3-design-system-extract/evals/fixtures/react-tailwind/src/index.css",
+        "skills/typo3-design-system-extract/evals/fixtures/react-tailwind/tailwind.config.js"
+      ],
+      "expectations": [
+        "The response extracts primary and secondary colors as observed facts from CSS and Tailwind config.",
+        "The response records source locators with file and property lines.",
+        "The response defines project-owned --brand-* tokens for fluid spacing that Astryx does not provide natively.",
+        "The response produces a valid, sealed design-system.json and human-readable design-system.md."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "representative",
+      "prompt": "Extract global styles from the Stitch HTML export at skills/typo3-design-system-extract/evals/fixtures/stitch-html/stitch.html and report light and dark surface tokens.",
+      "expected_output": "A design system report identifying the Stitch source and extracting the themed surface and accent tokens.",
+      "files": [
+        "skills/typo3-design-system-extract/evals/fixtures/stitch-html/stitch.html"
+      ],
+      "expectations": [
+        "The response detects the Stitch HTML source format and extracts root and .dark properties.",
+        "The response maps the theme selectors and records the light/dark mode scopes explicitly.",
+        "The response preserves source evidence without inventing missing responsive rules."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "edge-case",
+      "prompt": "A mockup screenshot shows cards with what appears to be an 8px or 10px gap, but no CSS source is available. Extract the spacing token.",
+      "expected_output": "A design token marked as inferred or approximate, noting the lack of declared source evidence.",
+      "files": [],
+      "expectations": [
+        "The response marks the confidence level of the gap token as 'inferred' or 'unknown'.",
+        "The response does not normalize the value to an assumed standard scale without documenting the assumption.",
+        "The response flags the handoff as incomplete or requiring confirmation if material layout rules depend on it."
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "edge-case",
+      "prompt": "The mockup declares a proprietary custom font 'Custom Inter Display' in index.css, but no webfont files or licensing headers are present in the repository. Extract the typography.",
+      "expected_output": "A font entry marked as unavailable or rights-unknown, proposing a fallback or decision gate rather than claiming verified font integration.",
+      "files": [
+        "skills/typo3-design-system-extract/evals/fixtures/react-tailwind/src/index.css"
+      ],
+      "expectations": [
+        "The response identifies the font family and flags its status as unavailable or rights-unknown.",
+        "The response documents a proposed fallback or records an unresolved item in the handoff.",
+        "The response does not mark foundation typography as verified when font files are missing."
+      ]
+    },
+    {
+      "id": 5,
+      "kind": "edge-case",
+      "prompt": "The mockup uses a global light theme on :root but has a scoped dark hero section with '.theme-dark'. Map the tokens and explain how Astryx layers handle this.",
+      "expected_output": "A token mapping that respects Astryx layer ordering and declaration scopes, avoiding overrides on :root that fail to apply within child scopes.",
+      "files": [],
+      "expectations": [
+        "The response specifies theme selectors for both :root and scoped sections.",
+        "The response explains that Astryx layer rules require declaring child overrides at the element's scope rather than expecting :root rules to override child layers.",
+        "The response verifies nested theme declaration scopes."
+      ]
+    },
+    {
+      "id": 6,
+      "kind": "boundary",
+      "prompt": "Integrate the extracted design system into a target TYPO3 13 installation at skills/typo3-design-system-extract/evals/fixtures/typo3-13-target/composer.json.",
+      "expected_output": "Preflight failure message explaining that TYPO3 13 is unsupported because Astryx requires TYPO3 14.3.x, keeping extraction separate from blocked implementation.",
+      "files": [
+        "skills/typo3-design-system-extract/evals/fixtures/typo3-13-target/composer.json"
+      ],
+      "expectations": [
+        "The preflight check identifies TYPO3 ~13.4.0 as incompatible.",
+        "The response halts any site-package modifications and reports targetCompatibility status as unsupported.",
+        "The response does NOT attempt to upgrade TYPO3 or claim TYPO3 13 compatibility."
+      ]
+    },
+    {
+      "id": 7,
+      "kind": "boundary",
+      "prompt": "Implement the site-package foundation in the target at skills/typo3-design-system-extract/evals/fixtures/fsc-target/composer.json.",
+      "expected_output": "Identification of the Fluid Styled Content conflict. In interactive mode, stop and ask the user; in non-interactive mode, set target-touching steps to blocked.",
+      "files": [
+        "skills/typo3-design-system-extract/evals/fixtures/fsc-target/composer.json"
+      ],
+      "expectations": [
+        "The preflight check detects typo3/cms-fluid-styled-content and flags an Astryx conflict.",
+        "The response stops target modifications and asks how to proceed, or marks target steps blocked if non-interactive.",
+        "The response does NOT automatically remove fluid-styled-content from composer.json as an implicit step."
+      ]
+    },
+    {
+      "id": 8,
+      "kind": "boundary",
+      "prompt": "Give me a token report of colors and spacing in our mockup folder. Do not edit or touch the TYPO3 site package.",
+      "expected_output": "An analysis-only run that extracts tokens and writes only the migration bundle, leaving target code completely untouched.",
+      "files": [
+        "skills/typo3-design-system-extract/evals/fixtures/react-tailwind/src/index.css"
+      ],
+      "expectations": [
+        "The response selects 'analysis-only' mode.",
+        "The response writes only design-system.json and design-system.md inside the migration bundle.",
+        "The response does not edit any site package files or install dependencies."
+      ]
+    },
+    {
+      "id": 9,
+      "kind": "edge-case",
+      "prompt": "Astryx online documentation lists '--astryx-color-brand-primary' but the installed tokens.stylex.js declares '--astryx-color-primary'. How should the mapping proceed?",
+      "expected_output": "A mapping prioritizing installed code over documentation, recording the discrepancy in the token ledger.",
+      "files": [],
+      "expectations": [
+        "The response uses the installed token declaration as the authoritative target.",
+        "The response records the discrepancy in the mapping rationale and handoff report.",
+        "The response avoids emitting references to nonexistent documented tokens."
+      ]
+    }
+  ]
+}
+

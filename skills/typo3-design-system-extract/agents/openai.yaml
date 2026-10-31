@@ -1,0 +1,10 @@
+interface:
+  display_name: "TYPO3 Design-System Extraction"
+  short_description: "Extract global mockup tokens and establish an Astryx foundation for TYPO3 14.3"
+  default_prompt: >-
+    Extract the global design system from the supplied URL, React source, Stitch design,
+    screenshots, or other artifacts. Combine available resources, inspect URLs in the
+    internal browser, map values to installed Astryx tokens, and produce a sealed handoff.
+policy:
+  allow_implicit_invocation: true
+

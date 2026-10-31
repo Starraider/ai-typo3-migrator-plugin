@@ -1,0 +1,414 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "handoff-v1/build-report.payload.schema.json",
+  "title": "build-report payload (v1)",
+  "type": "object",
+  "required": [
+    "component",
+    "completion",
+    "disposition",
+    "hypothesis",
+    "candidates",
+    "rejectedAlternatives",
+    "preflight",
+    "changes",
+    "extensionPoints",
+    "assets",
+    "checks",
+    "differences",
+    "acceptedDeviations"
+  ],
+  "properties": {
+    "component": {
+      "type": "object",
+      "required": [
+        "id",
+        "specRef"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "specRef": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "completion": {
+      "enum": [
+        "verified",
+        "qualified",
+        "blocked"
+      ]
+    },
+    "disposition": {
+      "enum": [
+        "configure",
+        "compose",
+        "extend",
+        "create",
+        "none"
+      ]
+    },
+    "hypothesis": {
+      "type": "object",
+      "required": [
+        "outcome"
+      ],
+      "properties": {
+        "outcome": {
+          "enum": [
+            "adopted",
+            "overridden"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "path",
+          "installedVersion",
+          "fit",
+          "gaps"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "installedVersion": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fit": {
+            "enum": [
+              "full",
+              "partial",
+              "none"
+            ]
+          },
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selected": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "rejectedAlternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "option",
+          "reason"
+        ],
+        "properties": {
+          "option": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "preflight": {
+      "type": "object",
+      "required": [
+        "status",
+        "fscConflict"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "blocked"
+          ]
+        },
+        "fscConflict": {
+          "type": "boolean"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "kind"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "created",
+              "modified",
+              "deleted"
+            ]
+          }
+        }
+      }
+    },
+    "extensionPoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "disposition"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "disposition": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "gate",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "computed-style",
+              "layout",
+              "screenshot",
+              "functional",
+              "editorial",
+              "build"
+            ]
+          },
+          "gate": {
+            "enum": [
+              "hard",
+              "advisory"
+            ]
+          },
+          "status": {
+            "enum": [
+              "passed",
+              "failed",
+              "not-run"
+            ]
+          },
+          "viewport": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "differences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "disposition"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "disposition": {
+            "enum": [
+              "open",
+              "accepted",
+              "noise"
+            ]
+          },
+          "decisionId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "acceptedDeviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "requirement",
+          "reason",
+          "approver",
+          "decisionId"
+        ],
+        "properties": {
+          "requirement": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "approver": {
+            "type": "string"
+          },
+          "decisionId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "designCoverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "requirement",
+          "targetElement",
+          "componentValue",
+          "inheritance",
+          "inheritedFrom",
+          "inheritedValue",
+          "globalRefs",
+          "componentTokens",
+          "coverage",
+          "evidence"
+        ],
+        "properties": {
+          "requirement": {
+            "type": "string"
+          },
+          "targetElement": {
+            "type": "string"
+          },
+          "componentValue": {
+            "type": "string"
+          },
+          "inheritance": {
+            "enum": [
+              "full",
+              "partial",
+              "none",
+              "unknown"
+            ]
+          },
+          "inheritedFrom": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "inheritedValue": {
+            "type": "string"
+          },
+          "globalRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "componentTokens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "value",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "status": {
+                  "enum": [
+                    "required",
+                    "defined",
+                    "unknown"
+                  ]
+                }
+              }
+            }
+          },
+          "coverage": {
+            "enum": [
+              "inherited",
+              "global-token",
+              "partial",
+              "component-specific",
+              "unknown"
+            ]
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

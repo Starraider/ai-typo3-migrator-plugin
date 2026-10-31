@@ -5,6 +5,9 @@
 
 ### Features
 
+* add typo3-design-system-extract, typo3-component-analyze, and typo3-component-build skills for React design-to-Astryx migrations
+* expand component analysis to describe whole-element visual design and defer global design-system coverage checks to implementation
+* add v1 handoff contract envelope, schemas, templates, and standalone validator helper
 * add skill for migrating TYPO3 Gridelements to b13/container ([18a1e00](https://github.com/Starraider/ai-typo3-migrator-plugin/commit/18a1e004ae2f7473e4b11bdbcc09a53de6eb795f))
 * add TYPO3 Tailwind CSS migration skill and plugin documentation ([64ca31c](https://github.com/Starraider/ai-typo3-migrator-plugin/commit/64ca31ccfeaff65e4cb1e59163bc58b2e744e478))
 * add typo3-upgrade-strategy-analysis skill definition, documentation, and tooling ([c33fcdc](https://github.com/Starraider/ai-typo3-migrator-plugin/commit/c33fcdca8ad29e7bc0c0a0a8f15f2658c183e64d))

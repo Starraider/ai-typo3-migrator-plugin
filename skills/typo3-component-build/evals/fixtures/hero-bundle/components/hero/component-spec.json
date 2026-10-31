@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "component-spec",
+  "artifactId": "hero",
+  "revision": "sha256:f00ed23b6ac25b76f914c76dbe345927c33813fb8a666bec8ee6d0f2020d2ab0",
+  "payloadDigest": "sha256:2a1c1bb8621ca479e692393a26ab74e6ef74257db3324b8a8ba494ba03abcdc6",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [
+    {
+      "artifactType": "design-system",
+      "artifactId": "acme-site",
+      "schemaVersion": "1.0.0",
+      "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+      "ref": "../../design-system.json"
+    }
+  ],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [],
+  "decisions": [],
+  "unresolved": [],
+  "payload": {
+    "component": {
+      "id": "hero",
+      "name": "Hero",
+      "sourceLocator": "mockup/src/components/Hero.tsx",
+      "renderedLocation": "/#hero"
+    },
+    "scope": "single",
+    "children": [],
+    "structure": [
+      {
+        "part": "background",
+        "role": "image"
+      },
+      {
+        "part": "content",
+        "role": "heading, subheading, actions"
+      }
+    ],
+    "variants": [
+      {
+        "name": "centered",
+        "evidence": "source"
+      }
+    ],
+    "contentModel": [
+      {
+        "name": "heading",
+        "kind": "editorial",
+        "cardinality": "1",
+        "validation": "max 90 characters"
+      },
+      {
+        "name": "subheading",
+        "kind": "editorial",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "actions",
+        "kind": "editorial",
+        "cardinality": "0..2"
+      },
+      {
+        "name": "background",
+        "kind": "editorial",
+        "cardinality": "0..1"
+      }
+    ],
+    "assets": [
+      {
+        "id": "hero-bg",
+        "role": "background",
+        "ownership": "fal-editorial",
+        "altRequired": false,
+        "status": "available"
+      }
+    ],
+    "responsive": [
+      {
+        "condition": "max-width 47.99rem",
+        "rule": "heading steps down one token size",
+        "evidence": "source"
+      }
+    ],
+    "interactions": [],
+    "referenceCaptures": [
+      {
+        "ref": "references/card-768.png",
+        "viewport": "768x900",
+        "state": "default",
+        "conditions": "Example Sans loaded, DPR 1"
+      }
+    ],
+    "candidateNotes": [
+      {
+        "candidate": "Astryx Hero",
+        "gaps": [],
+        "advisory": true
+      }
+    ],
+    "verificationCriteria": [
+      {
+        "id": "vc-1",
+        "criterion": "box geometry within 1px",
+        "viewport": "768x900",
+        "state": "default"
+      }
+    ],
+    "targetHypothesis": {
+      "placementClass": "content-element",
+      "placeable": true,
+      "proposedFields": [
+        "header",
+        "subheader",
+        "image",
+        "links"
+      ]
+    }
+  }
+}

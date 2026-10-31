@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "design-system",
+  "artifactId": "acme-site",
+  "revision": "sha256:625af5c4bb5ed8c1e2eaf18ef759fee6f2aad41dc5e3ab487d720652a30f631e",
+  "payloadDigest": "sha256:9c9a1c9e0dca19a132dc70cebf4b38649ed64d242c30340e05c4997f6b8261f2",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "readiness": "ready",
+  "sources": [
+    {
+      "kind": "react-source",
+      "locator": "mockup/src",
+      "identityStatus": "known",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "dependencies": [],
+  "target": {
+    "versionsKnown": true,
+    "typo3": "14.3.1",
+    "php": "8.3.12",
+    "astryx": "1.0.0",
+    "styleXConnector": "1.1.2",
+    "conflicts": []
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "class": "observed",
+      "kind": "source",
+      "locator": "mockup/src/index.css"
+    }
+  ],
+  "verification": [
+    {
+      "id": "v-css-manifest",
+      "status": "passed",
+      "reason": "CSS hash matches style manifest",
+      "command": "npm run build"
+    },
+    {
+      "id": "v-render",
+      "status": "passed",
+      "reason": "computed styles match reference at 3 widths"
+    }
+  ],
+  "decisions": [],
+  "unresolved": [],
+  "payload": {
+    "mode": "implementation",
+    "tokens": [
+      {
+        "id": "color.accent",
+        "tier": "semantic",
+        "role": "accent",
+        "value": "#0b5fff",
+        "renderedValue": "rgb(11, 95, 255)",
+        "sourceLocation": "mockup/src/index.css:12",
+        "confidence": "observed",
+        "scope": ":root",
+        "mapping": {
+          "status": "mapped",
+          "targetProperty": "--astryx-color-accent",
+          "rationale": "same semantic role in installed tokens.stylex.js"
+        }
+      },
+      {
+        "id": "space.section",
+        "tier": "primitive",
+        "role": "section spacing",
+        "value": "clamp(3rem, 6vw, 6rem)",
+        "confidence": "observed",
+        "scope": ":root",
+        "mapping": {
+          "status": "project-token",
+          "targetProperty": "--brand-space-section",
+          "rationale": "fluid value has no Astryx equivalent"
+        }
+      }
+    ],
+    "fonts": [
+      {
+        "family": "Example Sans",
+        "weights": [
+          "400",
+          "700"
+        ],
+        "status": "available",
+        "files": [
+          "Resources/Public/Fonts/example-sans.woff2"
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "id": "logo",
+        "source": "mockup/public/logo.svg",
+        "checksum": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mediaType": "image/svg+xml",
+        "ownership": "site-package",
+        "rights": "client-supplied",
+        "destination": "Resources/Public/Images/logo.svg",
+        "status": "available"
+      }
+    ],
+    "themes": [
+      {
+        "name": "default",
+        "selector": ":root",
+        "mode": "light",
+        "selectable": "verified"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "query": "(min-width: 48rem)",
+        "confidence": "observed"
+      }
+    ],
+    "globalStyles": [
+      {
+        "selector": "body",
+        "summary": "Example Sans 16px/1.6, accent link color"
+      }
+    ],
+    "targetCompatibility": {
+      "status": "supported",
+      "checks": [
+        {
+          "name": "typo3 14.3.x",
+          "result": "ok"
+        },
+        {
+          "name": "fluid_styled_content absent",
+          "result": "ok"
+        }
+      ]
+    },
+    "foundation": {
+      "status": "verified",
+      "assetMode": "consuming-project-vite",
+      "entrypoints": [
+        "Resources/Private/JavaScript/main.js"
+      ],
+      "manifests": [
+        "Resources/Public/.vite/manifest.json",
+        "Resources/Public/stylex-manifest.json"
+      ]
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "handoff-v1/design-system.payload.schema.json",
+  "title": "design-system payload (v1)",
+  "type": "object",
+  "required": ["mode", "tokens", "fonts", "assets", "themes", "breakpoints", "globalStyles", "targetCompatibility", "foundation"],
+  "properties": {
+    "mode": { "enum": ["analysis-only", "implementation"] },
+    "tokens": { "type": "array", "items": { "$ref": "#/$defs/token" } },
+    "fonts": { "type": "array", "items": { "$ref": "#/$defs/font" } },
+    "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" } },
+    "themes": { "type": "array", "items": { "$ref": "#/$defs/theme" } },
+    "breakpoints": { "type": "array", "items": { "$ref": "#/$defs/breakpoint" } },
+    "globalStyles": { "type": "array", "items": { "type": "object", "required": ["selector", "summary"], "properties": { "selector": { "type": "string" }, "summary": { "type": "string" } } } },
+    "targetCompatibility": {
+      "type": "object",
+      "required": ["status", "checks"],
+      "properties": {
+        "status": { "enum": ["supported", "unsupported", "conflict", "unknown", "not-applicable"] },
+        "checks": { "type": "array", "items": { "type": "object", "required": ["name", "result"], "properties": { "name": { "type": "string" }, "result": { "enum": ["ok", "fail", "unknown"] }, "detail": { "type": "string" } } } }
+      }
+    },
+    "foundation": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["not-started", "implemented", "verified", "blocked"] },
+        "assetMode": { "type": "string" },
+        "entrypoints": { "type": "array", "items": { "type": "string" } },
+        "manifests": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "$defs": {
+    "token": {
+      "type": "object",
+      "required": ["id", "tier", "role", "value", "confidence", "scope", "mapping"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "tier": { "enum": ["primitive", "semantic", "component"] },
+        "role": { "type": "string", "minLength": 1 },
+        "value": { "type": "string" },
+        "renderedValue": { "type": "string" },
+        "sourceLocation": { "type": "string" },
+        "confidence": { "enum": ["observed", "inferred", "unknown"] },
+        "scope": { "type": "string", "minLength": 1 },
+        "mapping": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": { "enum": ["mapped", "project-token", "unmapped", "conflict"] },
+            "targetProperty": { "type": "string" },
+            "conversion": { "type": "string" },
+            "rationale": { "type": "string" },
+            "discrepancy": { "type": "string" }
+          }
+        }
+      }
+    },
+    "font": {
+      "type": "object",
+      "required": ["family", "status"],
+      "properties": {
+        "family": { "type": "string" },
+        "weights": { "type": "array", "items": { "type": "string" } },
+        "status": { "enum": ["available", "unavailable", "rights-unknown", "substitution-proposed"] },
+        "files": { "type": "array", "items": { "type": "string" } },
+        "substitution": { "type": "string" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "required": ["id", "ownership", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "source": { "type": "string" },
+        "checksum": { "type": "string" },
+        "mediaType": { "type": "string" },
+        "ownership": { "enum": ["site-package", "fal-editorial"] },
+        "rights": { "type": "string" },
+        "destination": { "type": "string" },
+        "status": { "enum": ["available", "unresolved", "placeholder"] }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "required": ["name", "selector"],
+      "properties": {
+        "name": { "type": "string" },
+        "selector": { "type": "string" },
+        "mode": { "type": "string" },
+        "selectable": { "enum": ["verified", "unverified", "not-applicable"] }
+      }
+    },
+    "breakpoint": {
+      "type": "object",
+      "required": ["name", "query", "confidence"],
+      "properties": {
+        "name": { "type": "string" },
+        "query": { "type": "string" },
+        "confidence": { "enum": ["observed", "inferred", "unknown"] }
+      }
+    }
+  }
+}
+
