@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Starraider/ai-typo3-migrator-plugin/compare/v1.0.0...v1.1.0) (2026-10-31)
+
+
+### Features
+
+* add TYPO3 component analyze and build skills with handoff contracts ([c5ebc9e](https://github.com/Starraider/ai-typo3-migrator-plugin/commit/c5ebc9e876eae5b499118a9bb9a10c862894fcc2))
+
 ## 1.0.0 (2026-09-24)
 
 
